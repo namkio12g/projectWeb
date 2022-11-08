@@ -15,118 +15,17 @@
 </head>
 
 <body>
-
-    <script lang="javascript">
-        const products = [
+    <script src="javascript1.js"></script>
 
 
-
-            {
-                id: 1,
-                name: 'ddddd0',
-                image: 'images/iPhone_12_mini_PUR_1.jpg',
-                price: 5540,
-                branch: 'iphone',
-            },
-            {
-                id: 2,
-                name: 'ddddd0',
-                image: 'images/iPhone_12_mini_PUR_1.jpg',
-                price: 5540,
-                branch: 'iphone',
-            },
-            {
-                id: 3,
-                name: 'ddddd0',
-                image: 'images/iPhone_12_mini_PUR_1.jpg',
-                price: 5540,
-                branch: 'iphone',
-            },
-            // {
-            //     name: 'ddddd0',
-            //     image: 'images/iPhone_12_mini_PUR_1.jpg',
-            //     price: 5540,
-            //     branch: 'iphone',
-            // },
-            // {
-            //     name: 'ddddd0',
-            //     image: 'images/iPhone_12_mini_PUR_1.jpg',
-            //     price: 5540,
-            //     branch: 'iphone',
-            // },
-            // {
-            //     name: 'ddddd0',
-            //     image: 'images/iPhone_12_mini_PUR_1.jpg',
-            //     price: 5540,
-            //     branch: 'iphone',
-            // },
-            // {
-            //     name: 'ddddd0',
-            //     image: 'images/iPhone_12_mini_PUR_1.jpg',
-            //     price: 5540,
-            //     branch: 'iphone',
-            // },
-            // {
-            //     name: 'ddddd0',
-            //     image: 'images/iPhone_12_mini_PUR_1.jpg',
-            //     price: 5540,
-            //     branch: 'iphone',
-            // },
-            // {
-            //     name: 'ddddd0',
-            //     image: 'images/iPhone_12_mini_PUR_1.jpg',
-            //     price: 5540,
-            //     branch: 'iphone',
-            // },
-            // {
-            //     name: 'ddddd0',
-            //     image: 'images/iPhone_12_mini_PUR_1.jpg',
-            //     price: 5540,
-            //     branch: 'iphone',
-            // },
-            // {
-            //     name: 'ddddd0',
-            //     image: 'images/iPhone_12_mini_PUR_1.jpg',
-            //     price: 5540,
-            //     branch: 'iphone',
-            // },
-            // {
-            //     name: 'ddddd0',
-            //     image: 'images/iPhone_12_mini_PUR_1.jpg',
-            //     price: 5540,
-            //     branch: 'iphone',
-            // },
-            // {
-            //     name: 'ddddd1',
-            //     image: 'images/iPhone_12_mini_PUR_1.jpg',
-            //     price: 5541,
-            //     branch: 'samsung',
-            // },
-            // {
-            //     name: 'ddddd1',
-            //     image: 'images/iPhone_12_mini_PUR_1.jpg',
-            //     price: 5542,
-            //     branch: 'iphone',
-            // },
-            // {
-            //     name: 'ddddd',
-            //     image: 'images/iPhone_12_mini_PUR_1.jpg',
-            //     price: 5543,
-            //     branch: 'samsung',
-            // }
-
-
-        ];
-        window.localStorage.setItem("products", JSON.stringify(products));
-    </script>
 
     <div class="wrapper">
         <div class="header">
             <div>
-                <h3 id="title">Phone shop</h3>
+                <h3 id="title" onclick="titleOnclick()">Phone shop1</h3>
             </div>
             <div class="topnav">
-                <input type="text" style="width: 400px" placeholder="Search..">
+                <input type="text" style="width: 400px " placeholder="Search..">
             </div>
 
             <div class="nav_link">
@@ -138,7 +37,7 @@
                 </li>
             </div>
 
-            <h3 id="title">Phone shop</h3>
+
         </div>
 
 
@@ -146,285 +45,157 @@
 
             <div class="top-menu">
                 <ul>
-                    <li>phan loai</li>
-                    <li> muc gia</li>
-                    <li>something</li>
+                    <li class="filter-section">
+                        <div class="filter-label" style="cursor:pointer">Price</div>
+                        <div class="filter-main">
+                            <label for="lower-price">from</label>
+                            <br>
+                            <input type="text" id="lower-price">
+                            <br>
+                            <label for="higher-price">to</label>
+                            <br>
+                            <input type="text" id="higher-price">
+
+
+                        </div>
+                    </li>
+                    <li class="filter-section">
+                        <div class="filter-label" style="cursor:pointer"> phân loại</div>
+                        <div class="filter-main">
+                            <ul>
+                                <li>Iphone</li>
+                                <li>Samsung</li>
+                                <li>Xiaomi</li>
+                            </ul>
+
+                        </div>
+                    </li>
+                    <li style="position: relative;margin-top:5px ;overflow: hidden;">
+                        <button class="find-button">
+                            Find</button>
+                    </li>
                 </ul>
+
             </div>
 
             <div class="container">
+                <div class="cart-wrapper"></div>
+                <div class="cart-section">
+                    <div class="cart-tag">
+                        <div class="cart-head" style="display: flex;flex-direction: row;width: fit-content;">
+                            <img src="images/iPhone_12_mini_PUR_1.jpg" alt="">
+                            <div class="shopped-product" style="margin-left: 15px;">
+                                <h3>IphoneX</h3>
+                                <div class="shopped-product-amounts"
+                                    style="margin:5px 0;display: flex;flex-direction: row;">
+                                    <p>amount:</p>
+                                    <input type="text"
+                                        style="width: 30px;height: 30px;margin:0 5px;text-align: center;">
+                                    <p> x 1500$</p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="cart-tail">
+                            <h4>4500$</h4>
+                            <span>X</span>
+
+                        </div>
+
+
+                    </div>
+                    <div class="cart-tag">
+                        <div class="cart-head" style="display: flex;flex-direction: row;width: fit-content;">
+                            <img src="images/iPhone_12_mini_PUR_1.jpg" alt="">
+                            <div class="shopped-product" style="margin-left: 15px;">
+                                <h3>IphoneX</h3>
+                                <div class="shopped-product-amounts"
+                                    style="margin:5px 0;display: flex;flex-direction: row;">
+                                    <p>amount:</p>
+                                    <input type="text"
+                                        style="width: 30px;height: 30px;margin:0 5px;text-align: center;">
+                                    <p> x 1500$</p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="cart-tail">
+                            <h4>4500$</h4>
+                            <span>X</span>
+
+                        </div>
+
+
+                    </div>
+                    <div class="cart-tag">
+                        <div class="cart-head" style="display: flex;flex-direction: row;width: fit-content;">
+                            <img src="images/iPhone_12_mini_PUR_1.jpg" alt="">
+                            <div class="shopped-product" style="margin-left: 15px;">
+                                <h3>IphoneX</h3>
+                                <div class="shopped-product-amounts"
+                                    style="margin:5px 0;display: flex;flex-direction: row;">
+                                    <p>amount:</p>
+                                    <input type="text"
+                                        style="width: 30px;height: 30px;margin:0 5px;text-align: center;">
+                                    <p> x 1500$</p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="cart-tail">
+                            <h4>4500$</h4>
+                            <span>X</span>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
 
 
 
-                <!-- <div class="all-section">
-                    <div class="col-lg">
-                        <div class="product-image">
-                            <img src="Images/library-5536931_960_720.png">
-                            <button class="plus-button"><i class="bi bi-plus"></i></button>
-        
-                        </div>
-                        <div class="detail">
-                            <p>Name</p>
-                            <div class="rating">
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                            </div>
-                            <p><span>$45.5</span></p>
-        
-                        </div>
-        
-        
-                    </div>
-                    <div class="col-lg">
-                        <div class="product-image">
-                            <img src="Images/library-5536931_960_720.png">
-                            <button class="plus-button"><i class="bi bi-plus"></i></button>
-        
-                        </div>
-                        <div class="detail">
-                            <p>Name</p>
-                            <div class="rating">
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                            </div>
-                            <p><span>$45.5</span></p>
-        
-                        </div>
-        
-        
-                    </div>
-                    <div class="col-lg">
-                        <div class="product-image">
-                            <img src="Images/library-5536931_960_720.png">
-                            <button class="plus-button"><i class="bi bi-plus"></i></button>
-        
-                        </div>
-                        <div class="detail">
-                            <p>Name</p>
-                            <div class="rating">
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                            </div>
-                            <p><span>$45.5</span></p>
-        
-                        </div>
-        
-        
-                    </div>
-                    <div class="col-lg">
-                        <div class="product-image">
-                            <img src="Images/library-5536931_960_720.png">
-                            <button class="plus-button"><i class="bi bi-plus"></i></button>
-        
-                        </div>
-                        <div class="detail">
-                            <p>Name</p>
-                            <div class="rating">
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                            </div>
-                            <p><span>$45.5</span></p>
-        
-                        </div>
-        
-        
-                    </div>
-                    <div class="col-lg">
-                        <div class="product-image">
-                            <img src="Images/library-5536931_960_720.png">
-                            <button class="plus-button"><i class="bi bi-plus"></i></button>
-        
-                        </div>
-                        <div class="detail">
-                            <p>Name</p>
-                            <div class="rating">
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                                <span><i class="bi bi-star-fill"></i></span>
-                            </div>
-                            <p><span>$45.5</span></p>
-        
-                        </div>
-        
-        
-                    </div>
-        
-                </div> -->
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+
+
+    <div class="footer"></div>
+    <div class="detail-section">
+        <div class="bgr" onclick="closeDetail()"></div>
+        <div class="detail-main">
+            <div class="close" onclick="closeDetail()">X</div>
+            <div class="top-detail">
+
+                <img src="images/library-5536931_960_720.png" alt="">
+                <div class="product-detail">
+                    <h3 class="product-name">name</h3>
+                    <h3 class="product-price" style="color: red">6000đ</h3>
+
+                </div>
+            </div>
+            <div class="order-button">
+                Đặt hàng
             </div>
         </div>
+    </div>
 
-
-
-        <div class="footer"></div>
-        <div class="ctsp">
-            <div class="bgr"></div>
-            <div class="ctsp__main">
-                <div class="close">Xsdfsd</div>
-                <div class="test"></div>
-            </div>
-        </div>
 
     </div>
 
-    <script lang=>
-        const main = document.querySelector('.container');
-        var move = 0;
-        var moves = [];
-        var branches = ['iphone', 'samsung'];
-        swipeSectionEntries();
-
-        function swipeSectionEntries() {
-            main.innerHTML = "";
-            var entries = JSON.parse(window.localStorage.getItem("products" || "[]"));
-            var index = 0;
-            for (var branch of branches) {
-                main.innerHTML += '<div class="swipe-section"></div>';
-                var branchProduct = entries.filter(entry => entry.branch == branch);
-                if (branchProduct.length != 0) {
-                    main.lastElementChild.innerHTML = `
-                    <div class="swipe-content">
-                        <div class="content">
-                            <div class="title">
-                                <div class="title-block">
-                                    <div class="wrap-content">
-                                        <h3 class="title-group">${branch}</h3>
-                                        <div class="title-group-note">Happy Us</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swipe-wrapper">
-                            </div>
-                            <button class="move-right-button" onclick="moveRightButton(${index})"><i
-                                    class="bi bi-chevron-compact-right"></i></button>
-                            <button class="move-left-button" onclick="moveLeftButton(${index})"><i
-                                    class="bi bi-chevron-compact-left"></i></button>
-                            <div onclick="change()" class="show_all">xem tất cả</div>
-                        </div>
-                    </div>`;
-                    swpieWrapperWrite(branchProduct, index);
-                    index++;
-                    moves.push(0);
-                }
-            }
-
-        }
-
-        function swpieWrapperWrite(datas, index) {
-            for (var data of datas) {
-
-                document.getElementsByClassName('swipe-wrapper')[index].innerHTML += `
-
-                <div class="col-lg" data-id=${data.id}>
-                    <div class="product-image">
-                        <img src="${data.image}">
-                        <button class="plus-button"><i class="bi bi-plus"></i></button>
-
-                    </div>
-                    <div class="detail">
-                        <p>${data.name}</p>
-                        <div class="rating">
-                            <span><i class="bi bi-star-fill"></i></span>
-                            <span><i class="bi bi-star-fill"></i></span>
-                            <span><i class="bi bi-star-fill"></i></span>
-                            <span><i class="bi bi-star-fill"></i></span>
-                            <span><i class="bi bi-star-fill"></i></span>
-                        </div>
-                        <p><span>$${data.price}</span></p>
-
-                    </div>
-                </div>
-                `;
-            }
-
-        }
-        var rightButtons = document.getElementsByClassName('move-right-button');
-        var leftButtons = document.getElementsByClassName('move-left-button');
-
-        function moveRightButton(index) {
-            // clearInterval(myInterval);
-            leftButtons[index].style.display = "block";
-            moves[index] += -250;
-            if (moves[index] == -500) {
-                rightButtons[index].style.display = "none";
-            }
-            document.getElementsByClassName('swipe-wrapper')[index].style.left = `${moves[index]}px`
-        }
-
-        function moveLeftButton(index) {
-            // clearInterval(myInterval);
-            rightButtons[index].style.display = "block";
-            moves[index] += 250;
-            if (moves[index] == 0) {
-                leftButtons[index].style.display = "none";
-            }
-
-            document.getElementsByClassName('swipe-wrapper')[index].style.left = `${moves[index]}px`
-        }
-
-
-        // const collection=document.getElementsByClassName('swipe-wrapper');
-        // const myInterval = setInterval(function () {
-        //     move += -250;
-        //     if (move < -500) {
-        //         move = 0;
-        //         leftButton.style.display = "none";
-        //         rightButton.style.display = "block";
-        //     } else if (move == -500) {
-        //         rightButton.style.display = "none";
-        //     } else {
-        //         leftButton.style.display = "block";
-
-
-        //     }
-
-
-        //     for (let i = 0; i < collection.length; i++) {
-        //         delay
-        //         collection[i].style.left = `${move}px`;
-        //     }
-
-        // }, 4000);
-
-        function change() {
-            document.querySelector(".swipe-section").style.display = 'none';
-            document.querySelector(".all-section").style.display = 'grid';
-
-        }
-
-        const bgrClose = document.querySelector('.bgr')
-        const btnClose = document.querySelector('.close')
-
-        btnClose.onclick = () => {
-            document.querySelector('.ctsp').classList.remove('active')
-        }
-
-        const test = document.querySelectorAll('.col-lg')
-        const found = test.forEach((item, id) => {
-            item.onclick = () => {
-
-                const spct = products.find(item1 => item1.id == item.dataset.id)
-                console.log(spct)
-                document.querySelector('.ctsp').classList.add('active')
-                const test22 = document.querySelector('.test').innerHTML = `
-                <div class="test">${spct.id}</div>
-                `
-            }
-        })
-    </script>
+    <script src="javascript2.js"></script>
 
 
 </body>
