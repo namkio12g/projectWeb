@@ -10,10 +10,6 @@ body {
   margin: 0;
 }
 
-p {
-  height: 5px;
-  width: fit-content;
-}
 h3 {
   margin: 0;
 }
@@ -205,17 +201,13 @@ li {
   filter: brightness(70%);
 }
 .container {
-  align-items: center;
-  width: 1000px;
+  width: 100%;
   height: auto;
   margin: 15px 0;
-  margin-left: 300px;
   z-index: 1;
   background-color: #fff;
   border-radius: 10px;
-
   box-sizing: border-box;
-
   overflow: hidden;
   display: block;
 }
@@ -228,42 +220,26 @@ li {
   font-size: 22px;
 }
 
-.title-block::before {
-  z-index: -1;
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 30px;
-  width: 1000px;
-  height: 1px;
-  background: #333;
-  color: black;
-}
-
-.title-block::after {
-  z-index: -1;
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 35px;
-  width: 1000px;
-  height: 1px;
-  background: #333;
-  color: black;
-}
-
 .title .title-block .wrap-content {
   width: fit-content;
   display: inline-block;
-  background: #fff;
 }
-
-.swipe-content {
+.section {
+  margin-top: 20px;
+  margin-bottom: 20px;
   width: inherit;
-  border: #071a6a 1px solid;
+}
+.section:nth-child(odd) {
+  background-color: #f2efef;
+}
+.swipe-content {
+  margin: auto;
+  width: 1300px;
+  border-radius: 5px;
 
   overflow: hidden;
-  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 50px;
   position: relative;
   height: 950px;
 }
@@ -278,7 +254,8 @@ li {
   grid-template-rows: repeat(2, auto);
   grid-auto-flow: column;
   grid-auto-columns: 250px;
-  row-gap: 15px;
+  column-gap: 80px;
+  row-gap: 80px;
   height: auto;
   position: absolute;
   left: 0;

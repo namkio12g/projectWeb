@@ -17,7 +17,7 @@ function swipeSectionEntries(entries) {
     container.innerHTML = "";
     var index = 0;
     for (var branch of branches) {
-        container.innerHTML += '<div class="swipe-section"></div>';
+        container.innerHTML += '<div class="section"></div>';
         var branchProduct = entries.filter(entry => entry.branch == branch);
         if (branchProduct.length != 0) {
             container.lastElementChild.innerHTML = `
@@ -37,9 +37,10 @@ function swipeSectionEntries(entries) {
                                     class="bi bi-chevron-compact-right"></i></button>
                             <button class="move-left-button" onclick="moveLeftButton(${index})"><i
                                     class="bi bi-chevron-compact-left"></i></button>
-                            <div onclick="change()" class="show_all">xem tất cả</div>
+
                         </div>
-                    </div>`;
+                    </div>   `;
+
             swpieWrapperWrite(branchProduct, index);
             index++;
             moves.push(0);
@@ -80,76 +81,65 @@ function swpieWrapperWrite(datas, index) {
 }
 var rightButtons = document.querySelectorAll('.container .move-right-button');
 var leftButtons = document.querySelectorAll('.container .move-left-button');
+var shift = 330;
 
 function moveRightButton(index) {
     var item = document.getElementsByClassName('swipe-wrapper')[index];
-    clearInterval(ItemInterval[index]);
-    leftButtons[index].style.display = "block";
-    moves[index] += -250;
-    if (moves[index] == -500) {
-        rightButtons[index].style.display = "none";
+    if (item.querySelectorAll('.col-lg').length > 8) {
+        clearInterval(ItemInterval[index]);
+        leftButtons[index].style.display = "block";
+        moves[index] += -shift;
+        if (moves[index] == -2 * shift) {
+            rightButtons[index].style.display = "none";
+        }
+        item.style.left = `${moves[index]}px`
     }
-    item.style.left = `${moves[index]}px`
 }
 
 function moveLeftButton(index) {
-    clearInterval(ItemInterval[index]);
-    rightButtons[index].style.display = "block";
-    moves[index] += 250;
-    if (moves[index] == 0) {
-        leftButtons[index].style.display = "none";
-    }
+    var item = document.getElementsByClassName('swipe-wrapper')[index];
+    if (item.querySelectorAll('.col-lg').length > 8) {
+        clearInterval(ItemInterval[index]);
+        rightButtons[index].style.display = "block";
+        moves[index] += shift;
+        if (moves[index] == 0) {
+            leftButtons[index].style.display = "none";
+        }
 
-    document.getElementsByClassName('swipe-wrapper')[index].style.left = `${moves[index]}px`
+        item.style.left = `${moves[index]}px`
+    }
 }
 
 
-// const myInterval = setInterval(function () {
 
-
-
-//     for (let i = 0; i < collection.length; i++) {
-//         moves[i] += -250;
-//         if (moves[i] < -500) {
-//             moves[i] = 0;
-//             leftButtons[i].style.display = "none";
-//             rightButtons[i].style.display = "block";
-//         } else if (moves[i] == -500) {
-//             rightButtons[i].style.display = "none";
-//         } else {
-//             leftButtons[i].style.display = "block";
-
-
-//         }
-//         collection[i].style.left = `${moves[i]}px`;
-//     }
-
-// }, 4000);
 setIntervalItem();
 
 function setIntervalItem() {
     for (let i = 0; i < collection.length; i++) {
-        ItemInterval.push(setInterval(function () {
+        var listCollg = collection[i].querySelectorAll('.col-lg');
+        if (listCollg.length > 8) {
+            ItemInterval.push(setInterval(function () {
 
 
 
 
-            moves[i] += -250;
-            if (moves[i] < -500) {
-                moves[i] = 0;
-                leftButtons[i].style.display = "none";
-                rightButtons[i].style.display = "block";
-            } else if (moves[i] == -500) {
-                rightButtons[i].style.display = "none";
-            } else {
-                leftButtons[i].style.display = "block";
+                moves[i] += -shift;
+                if (moves[i] < -shift) {
+                    moves[i] = 0;
+                    leftButtons[i].style.display = "none";
+                    rightButtons[i].style.display = "block";
+                } else if (moves[i] == -shift * 2) {
+                    rightButtons[i].style.display = "none";
+                } else {
+                    leftButtons[i].style.display = "block";
 
 
-            }
-            collection[i].style.left = `${moves[i]}px`;
+                }
+                collection[i].style.left = `${moves[i]}px`;
 
 
-        }, 4000))
+            }, 4000))
+        }
     }
 }
 
@@ -173,20 +163,20 @@ function colOnclick() {
         }
     })
 }
-const label = document.querySelectorAll('.filter-label');
-const filterSection = document.getElementsByClassName('filter-section');
-label.forEach((item, index) => {
-    item.onclick = () => {
-        if (filterSection[index].classList.contains(
-                'active')) {
-            filterSection[index].classList.remove('active')
-        } else {
-            filterSection[index].classList.add('active')
+// const label = document.querySelectorAll('.filter-label');
+// const filterSection = document.getElementsByClassName('filter-section');
+// label.forEach((item, index) => {
+//     item.onclick = () => {
+//         if (filterSection[index].classList.contains(
+//                 'active')) {
+//             filterSection[index].classList.remove('active')
+//         } else {
+//             filterSection[index].classList.add('active')
 
-        }
+//         }
 
-    }
-})
+//     }
+// })
 
 
 
