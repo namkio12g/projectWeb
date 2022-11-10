@@ -7,15 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="Ourcss.css">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="welcome-section.css">
     <!-- Bootstrap Font Icon CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
 </head>
 
 <body>
-    <script src="javascript1.js"></script>
+    <!-- <script src="javascript1.js"></script> -->
 
 
 
@@ -43,120 +42,31 @@
 
         <div class="main">
 
-            <div class="top-menu">
-                <ul>
-                    <li class="filter-section">
-                        <div class="filter-label" style="cursor:pointer">Price</div>
-                        <div class="filter-main">
-                            <label for="lower-price">from</label>
-                            <br>
-                            <input type="text" id="lower-price">
-                            <br>
-                            <label for="higher-price">to</label>
-                            <br>
-                            <input type="text" id="higher-price">
-
-
-                        </div>
-                    </li>
-                    <li class="filter-section">
-                        <div class="filter-label" style="cursor:pointer"> phân loại</div>
-                        <div class="filter-main">
-                            <ul>
-                                <li>Iphone</li>
-                                <li>Samsung</li>
-                                <li>Xiaomi</li>
-                            </ul>
-
-                        </div>
-                    </li>
-                    <li style="position: relative;margin-top:5px ;overflow: hidden;">
-                        <button class="find-button">
-                            Find</button>
-                    </li>
-                </ul>
-
-            </div>
-
-            <div class="container">
-                <div class="cart-wrapper"></div>
-                <div class="cart-section">
-                    <div class="cart-tag">
-                        <div class="cart-head" style="display: flex;flex-direction: row;width: fit-content;">
-                            <img src="images/iPhone_12_mini_PUR_1.jpg" alt="">
-                            <div class="shopped-product" style="margin-left: 15px;">
-                                <h3>IphoneX</h3>
-                                <div class="shopped-product-amounts"
-                                    style="margin:5px 0;display: flex;flex-direction: row;">
-                                    <p>amount:</p>
-                                    <input type="text"
-                                        style="width: 30px;height: 30px;margin:0 5px;text-align: center;">
-                                    <p> x 1500$</p>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <div class="cart-tail">
-                            <h4>4500$</h4>
-                            <span>X</span>
-
-                        </div>
-
+            <div class="welcom-section">
+                <div class="swipe-image ">
+                    <ul style="height: 550px;width:inherit ">
+                        <li style="opacity:  1;">
+                            <img src="images/image3.jpg   " style="height:550px;width:1500px; ;" alt="">
+                        </li>
+                        <li style="opacity:  0"><img src="images/image5.webp" style="height:550px;width: 1500px; ;"
+                                alt=""></li>
+                        <li style="opacity: 0"><img src="images/image4.webp" style="height:550px;width: 1500px; ;"
+                                alt=""></li>
+                    </ul>
+                    <div class="welcome-title" style="display: block;z-index: 1;">
+                        <h1>Welcome</h1>
+                        <p>See how your users experience your website in realtime or view
+                            trends to see any changes in performance over time.</p>
 
                     </div>
-                    <div class="cart-tag">
-                        <div class="cart-head" style="display: flex;flex-direction: row;width: fit-content;">
-                            <img src="images/iPhone_12_mini_PUR_1.jpg" alt="">
-                            <div class="shopped-product" style="margin-left: 15px;">
-                                <h3>IphoneX</h3>
-                                <div class="shopped-product-amounts"
-                                    style="margin:5px 0;display: flex;flex-direction: row;">
-                                    <p>amount:</p>
-                                    <input type="text"
-                                        style="width: 30px;height: 30px;margin:0 5px;text-align: center;">
-                                    <p> x 1500$</p>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <div class="cart-tail">
-                            <h4>4500$</h4>
-                            <span>X</span>
-
-                        </div>
-
+                    <button class="move-right-button" onclick=""><i class="bi bi-chevron-compact-right"></i></button>
+                    <button class="move-left-button" onclick=""><i class="bi bi-chevron-compact-left"></i></button>
+                    <div class="slides-pagination">
+                        <a href="#1" class="current"></a>
+                        <a href="#2"></a>
+                        <a href="#3"></a>
 
                     </div>
-                    <div class="cart-tag">
-                        <div class="cart-head" style="display: flex;flex-direction: row;width: fit-content;">
-                            <img src="images/iPhone_12_mini_PUR_1.jpg" alt="">
-                            <div class="shopped-product" style="margin-left: 15px;">
-                                <h3>IphoneX</h3>
-                                <div class="shopped-product-amounts"
-                                    style="margin:5px 0;display: flex;flex-direction: row;">
-                                    <p>amount:</p>
-                                    <input type="text"
-                                        style="width: 30px;height: 30px;margin:0 5px;text-align: center;">
-                                    <p> x 1500$</p>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <div class="cart-tail">
-                            <h4>4500$</h4>
-                            <span>X</span>
-
-                        </div>
-
-
-                    </div>
-
                 </div>
 
 
@@ -165,8 +75,13 @@
 
 
 
+            <div class="container">
 
 
+
+
+
+            </div>
         </div>
     </div>
 
@@ -196,6 +111,7 @@
     </div>
 
     <script src="javascript2.js"></script>
+    <script src="welcomeSectionjs.js"></script>
 
 
 </body>

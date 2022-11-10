@@ -78,8 +78,8 @@ function swpieWrapperWrite(datas, index) {
     }
 
 }
-var rightButtons = document.getElementsByClassName('move-right-button');
-var leftButtons = document.getElementsByClassName('move-left-button');
+var rightButtons = document.querySelectorAll('.container .move-right-button');
+var leftButtons = document.querySelectorAll('.container .move-left-button');
 
 function moveRightButton(index) {
     var item = document.getElementsByClassName('swipe-wrapper')[index];

@@ -1,3 +1,10 @@
+@import "compass/css3";
+@font-face {
+  @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,400italic|Montserrat:400,700);
+  fontsans: "Montserrat", sans-serif;
+  fontserif: "Droid Serif", serif;
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -13,7 +20,7 @@ h3 {
 
 .header {
   top: 0;
-  background-color: darkslategray;
+  background-color: #fea300;
   height: 100px;
   width: 100%;
   display: flex;
@@ -81,13 +88,14 @@ li {
 }
 
 .main {
-  height: auto;
   display: flex;
-  margin-left: 20px;
-  margin: 2% 2%;
+  flex-direction: column;
+  justify-content: center;
+  /* background-color: #071a6a; */
+  z-index: 0;
 }
 
-.top-menu {
+/* .top-menu {
   float: left;
   width: 350px;
   height: fit-content;
@@ -145,13 +153,66 @@ li {
 }
 .find-button:hover {
   background-color: yellow;
+} */
+.welcome-sction {
 }
-
+.swipe-image {
+  margin: 5px 3px;
+  position: relative;
+  height: 550px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-left: 9px;
+  z-index: 0;
+  justify-content: center;
+}
+.welcome-title {
+  position: absolute;
+  color: #fff;
+  font-weight: 400;
+  display: block;
+  text-align: center;
+}
+.welcome-title h1 {
+  font-size: 60px;
+}
+.welcome-title p {
+  width: 700px;
+  font-size: 20px;
+  font-weight: 500;
+  font-family: var(fontsans);
+}
+.swipe-image .move-right-button {
+  background-color: #fea300;
+  top: 250px;
+  right: 20px;
+  opacity: 1;
+}
+.swipe-image .move-left-button {
+  background-color: #fea300;
+  top: 250px;
+  left: px;
+  opacity: 1;
+  display: block;
+}
+.swipe-image ul li {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  transition: opacity 0.8s ease-in;
+  filter: brightness(70%);
+}
 .container {
-  float: left;
   align-items: center;
-  width: 890px;
+  width: 1000px;
   height: auto;
+  margin: 15px 0;
+  margin-left: 300px;
+  z-index: 1;
+  background-color: #fff;
+  border-radius: 10px;
 
   box-sizing: border-box;
 
@@ -164,6 +225,7 @@ li {
   padding-left: 90px;
   position: relative;
   margin-bottom: 15px;
+  font-size: 22px;
 }
 
 .title-block::before {
@@ -197,7 +259,8 @@ li {
 }
 
 .swipe-content {
-  width: 1000px;
+  width: inherit;
+  border: #071a6a 1px solid;
 
   overflow: hidden;
   margin-bottom: 20px;
@@ -354,7 +417,7 @@ li {
 
 .footer {
   height: 420px;
-  background-color: coral;
+  background-color: #9b4400;
 }
 
 .all-section {
@@ -509,12 +572,19 @@ li {
   transition: 0.3s ease;
 }
 .cart-section {
+  align-items: center;
   margin-top: 5px;
-  width: 700px;
+  width: 1000px;
 }
 .all-wrapper {
   border: #65bcc9 solid 1px;
   height: 1100px;
+}
+.cart-container {
+  width: inherit;
+}
+.cart-section {
+  width: inherit;
 }
 .cart-tag {
   border: #000 solid 1px;
@@ -524,6 +594,7 @@ li {
   justify-content: space-between;
   align-items: center;
   height: fit-content;
+  width: calc(inherit-5px);
 }
 .cart-tag img {
   height: 70px;
@@ -532,7 +603,7 @@ li {
 }
 .cart-tail {
   display: flex;
-  width: 100px;
+  width: 200px;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -544,7 +615,55 @@ li {
   width: 20px;
   text-align: center;
   cursor: pointer;
+  color: #fff;
+  font-size: 13px;
 }
 .cart-tail span:hover {
   background-color: red;
+}
+.heading {
+  position: relative;
+  height: 60px;
+  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.heading::before {
+  content: "";
+  width: 1000px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1px;
+  background-color: #000;
+}
+.heading::after {
+  content: "";
+  width: 1000px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background-color: #000;
+}
+.heading h1 {
+  font-family: fontSerif;
+  font-size: 2em;
+}
+.heading a {
+  text-decoration: none;
+  font-family: fontSans;
+  letter-spacing: -0.015em;
+  font-size: 0.75em;
+  padding: 1em;
+  color: #fff;
+  background: #82ca9c;
+  font-weight: bold;
+  border-radius: 50px;
+  text-align: right;
+}
+.heading a:hover {
+  background: #f69679;
+  color: #fff;
 }
