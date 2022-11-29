@@ -22,7 +22,6 @@ const welcomeInterval = setInterval(function () {
 
 
 }, 4000)
-// clearInterval(welcomeInterval)
 list_pag.forEach((item, index) => {
     item.onclick = () => {
         clearInterval(welcomeInterval);

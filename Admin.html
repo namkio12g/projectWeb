@@ -1,0 +1,205 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Untitled Document</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="https://kit.fontawesome.com/946bae9e7a.js" crossorigin="anonymous"></script>
+</head>
+
+<body onload="getallphone();getallhd();intcthd()">
+	<input type="checkbox" id="checkbox">
+	<label for="checkbox">
+		<i class="fa-solid fa-bars" id="btn"></i>
+		<i class="fa-solid fa-circle-xmark" id="cancel"></i>
+	</label>
+	<div class="leftmenu">
+		<header>Admin</header>
+		<ul>
+			<li><a href="#" onClick="openphone()"><i id="phonetbl" class="fa-solid fa-phone"></i>Phone</a></li>
+			<li><a href="#" onClick="openhd()"><i id="hoadontbl" class="fa-solid fa-file-invoice"></i>Bill</a></li>
+			<li><a href="#" onClick="openstatistic()"><i class="fa-solid fa-chart-simple"></i>Statistic</a></li>
+			<li><a href="#" onClick="openuser()"><i class="fa-solid fa-user"></i>User</a></li>
+			<li><a href="#"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
+		</ul>
+	</div>
+	<div class="content">
+		<div class="tbl" id="ptbl">
+			<div>
+				<button class="button-5" id="newphone" role="button" onclick="opennew(this)">Add new phone</button>
+			</div>
+			<table class="content-table" id="phonetable">
+				<thead>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Price</th>
+					<th>OS</th>
+					<th>Brand</th>
+					<th>IMG</th>
+					<th>Action</th>
+				</thead>
+				<tbody id="phonetablebody">
+
+				</tbody>
+			</table>
+			<div class="search">
+				<input type="text" placeholder="Search" id="searchtxt" name="searchtxt">
+				<select name="psearchtype" id="psearchtype">
+					<option value="ID">ID</option>
+					<option value="Name">Name</option>
+					<option value="Brand">Brand</option>
+					<option value="OS">OS</option>
+				</select>
+				<input type="button" value="Search" onClick="search()">
+			</div>
+		</div>
+		<div class="hoadon" id="hdtbl">
+			<div>
+				<button class="button-5" id="newhd" role="button" onclick="hdopennew(this)">Add new HD</button>
+			</div>
+			<table class="content-table" id="hdtable">
+				<thead>
+					<th>ID</th>
+					<th>TenKH</th>
+					<th>SDTKH</th>
+					<th>Ngay</th>
+					<th>Tongtien</th>
+					<th>Tinhtrang</th>
+					<th>Action</th>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+			<div class="search">
+				<input type="text" placeholder="Search" id="searchhdtxt" name="searchtxt">
+				<select name="hdsearchtype" id="hdsearchtype">
+					<option value="ID">ID</option>
+					<option value="TenKH">TenKH</option>
+					<option value="SDTKH">SDTKH</option>
+					<option value="Ngay">Ngay</option>
+					<option value="TinhTrang">TinhTrang</option>
+				</select>
+				<input type="button" value="Search" onClick="hdsearch()">
+			</div>
+		</div>
+		<div class="hoadon" id="usertbl">
+			<div>
+				<button class="button-5" id="newuser" role="button" onclick="useropennew(this)">Add new User</button>
+			</div>
+			<table class="content-table" id="usertable">
+				<thead>
+					<th>Username</th>
+					<th>Password</th>
+					<th>Realname</th>
+					<th>SDT</th>
+					<th>Level</th>
+					<th>Action</th>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+			<div class="search">
+				<input type="text" placeholder="Search" id="searchusertxt" name="searchtxt">
+				<select name="usersearchtype" id="usersearchtype">
+					<option value="Username">Username</option>
+					<option value="Level">Level</option>
+				</select>
+				<input type="button" value="Search" onClick="searchuser()">
+			</div>
+		</div>
+		<div class="hoadon" id="statistictbl">
+			<div class="search">
+				<input type="text" placeholder="Enter PhoneBrand" id="searchsstxt" name="searchtxt">
+				<select id="ssearchtype">
+					<option value="Today">Today</option>
+					<option value="This month">This month</option>
+					<option value="This year">This year</option>
+					<option value="ALL">ALL</option>
+				</select>
+				<input type="button" value="Search" onClick="CAl()">
+			</div>
+			<div style="margin-top: 75px">
+				<table class="content-table" id="statistictable">
+					<thead>
+						<th>ID</th>
+						<th>Name</th>
+						<th>SL ban ra</th>
+						<th>Tongtien</th>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+
+	</div>
+	<div class="popup-container" id="addphone">
+		<form class="popup-form" method="post" id="addphoneform" enctype="multipart/form-data">
+			<div class="closefrm" onClick="closeform()">+</div>
+			<div class="phoneinput" id="phoneinput">
+				<input type="text" placeholder="ID" id="phoneid" name="phoneid">
+				<input type="text" placeholder="Name" id="phonename" name="phonename">
+				<input type="text" placeholder="Price" id="phoneprice" name="phoneprice">
+				<input type="text" placeholder="OS" id="phoneos" name="phoneos">
+				<input type="text" placeholder="Brand" id="phonebrand" name="phonebrand">
+				<input type="button" onclick="phoneaction()" value="SUBMIT" name="phonesubmit">
+			</div>
+			<div class="imgcombo">
+				<input type="file" name="phoneimgupload" id="phoneimgupload" onchange="preview()">
+				<img id="phoneimg" height="400" width="325" alt="Phone Image">
+				<input type="button" onClick="delimg()" value="Delete Image">
+			</div>
+		</form>
+		<form class="popup-form" method="post" id="addhdform" enctype="multipart/form-data">
+			<div class="closefrm" onClick="closeform()">+</div>
+			<div class="hdinput" id="hdinput">
+				<input type="text" placeholder="ID" id="hdid">
+				<input type="text" placeholder="Ten khach hang" id="TenKH">
+				<input type="text" placeholder="SDTKH" id="SDTKH">
+				<input type="text" placeholder="Ngay" id="Ngay">
+				<input type="text" placeholder="Tongtien" id="Tongtien">
+				<div style="margin-left: 28.5% ">
+					<input type="checkbox" id="tinhtrang" style="display: inline-block; width: 29px;height: 29px">
+					<label for="tinhtrang" style="font-size: 32px;">Don hang da xu ly</label>
+				</div>
+				<input type="button" onclick="hdformaction()" value="SUBMIT" name="hdsubmit">
+			</div>
+		</form>
+		<form class="popup-form" method="post" id="cthdform" enctype="multipart/form-data">
+			<div class="closefrm" onClick="closeformcthd()">+</div>
+			<div class="hdinput" id="cthdinput">
+				<table class="content-table" id="cthdtable">
+					<thead>
+						<th>IDSP</th>
+						<th>TenSP</th>
+						<th>SL</th>
+						<th>Price</th>
+						<th>Action</th>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+				<div>
+					<p id="thanhtien">Thanh Tien: </p>
+					<p id="cthdid">IDHD: </p>
+				</div>
+			</div>
+		</form>
+		<form class="popup-form" method="post" id="adduserform" enctype="multipart/form-data">
+			<div class="closefrm" onClick="closeform()">+</div>
+			<div class="hdinput" id="userinput">
+				<input type="text" placeholder="Username" id="username">
+				<input type="text" placeholder="Password" id="password">
+				<input type="text" placeholder="Realname" id="realname">
+				<input type="text" placeholder="SDT" id="sdt">
+				<input type="text" placeholder="Level" id="level">
+				<input type="button" onclick="userformaction()" value="SUBMIT" name="phonesubmit">
+			</div>
+		</form>
+	</div>
+	<script src="js.js"></script>
+</body>
+
+</html>

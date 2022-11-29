@@ -1,13 +1,15 @@
-const container = document.querySelector('.container');
+var container = document.querySelector('.container');
 var move = 0;
 var moves = [];
-var branches = ['iphone', 'samsung'];
+var branches = ['apple', 'samsung', 'xiaomi'];
 var collection = [];
 var ItemInterval = [];
 var lengthOfPagination = 0;
 
-var data = JSON.parse(window.localStorage.getItem("products" || "[]"));
+const data = JSON.parse(window.localStorage.getItem("phone" || "[]"));
 swipeSectionEntries(data);
+// renderAllSection(data);
+
 
 function titleOnclick() {
     location.reload();
@@ -16,17 +18,17 @@ function titleOnclick() {
 function swipeSectionEntries(entries) {
     container.innerHTML = "";
     var index = 0;
-    for (var branch of branches) {
+    for (var brand of branches) {
         container.innerHTML += '<div class="section"></div>';
-        var branchProduct = entries.filter(entry => entry.branch == branch);
-        if (branchProduct.length != 0) {
+        var brandProduct = entries.filter(entry => entry.Brand.toLowerCase() == brand);
+        if (brandProduct.length != 0) {
             container.lastElementChild.innerHTML = `
                     <div class="swipe-content">
                         <div class="content">
                             <div class="title">
                                 <div class="title-block">
                                     <div class="wrap-content">
-                                        <h3 class="title-group">${branch}</h3>
+                                        <h3 class="title-group" id="${brand}">${brand.toUpperCase()}</h3>
                                         <div class="title-group-note">Happy Us</div>
                                     </div>
                                 </div>
@@ -41,7 +43,7 @@ function swipeSectionEntries(entries) {
                         </div>
                     </div>   `;
 
-            swpieWrapperWrite(branchProduct, index);
+            swpieWrapperWrite(brandProduct, index);
             index++;
             moves.push(0);
         }
@@ -56,14 +58,14 @@ function swpieWrapperWrite(datas, index) {
 
         document.getElementsByClassName('swipe-wrapper')[index].innerHTML += `
 
-                <div class="col-lg" data-id=${data.id}>
+                <div class="col-lg" data-id=${data.ID}>
                     <div class="product-image">
-                        <img src="${data.image}">
+                        <img src="${data.img}">
                         <button class="plus-button"><i class="bi bi-plus"></i></button>
 
                     </div>
                     <div class="detail">
-                        <p>${data.name}</p>
+                        <p>${data.Name}</p>
                         <div class="rating">
                             <span><i class="bi bi-star-fill"></i></span>
                             <span><i class="bi bi-star-fill"></i></span>
@@ -71,7 +73,7 @@ function swpieWrapperWrite(datas, index) {
                             <span><i class="bi bi-star-fill"></i></span>
                             <span><i class="bi bi-star-fill"></i></span>
                         </div>
-                        <p><span>$${data.price}</span></p>
+                        <p><span>$${data.Price}</span></p>
 
                     </div>
                 </div>
@@ -155,33 +157,40 @@ function colOnclick() {
     test.forEach((item, id) => {
         item.onclick = () => {
 
-            var spct = data.find(item1 => item1.id == item.dataset.id)
+            var spct = data.find(item1 => item1.ID == item.dataset.id)
             document.querySelector('.detail-section').classList.add('active')
             document.querySelector('.product-name').innerHTML = `
-                    ${spct.name}
+                    ${spct.Name}
                     `
+            document.querySelector('.product-price').innerHTML = `
+                    ${spct.Price}$
+                    `
+            document.querySelector('.brand').innerHTML = `
+                    ${spct.Brand}
+                    `
+            document.querySelector('.OS').innerHTML = `
+                    ${spct.OS}
+                    `
+            document.querySelector('.top-detail img').src = `
+                    ${spct.img}
+                    `
+            document.getElementById('product-id').value = `${spct.ID}`
         }
     })
+
 }
-// const label = document.querySelectorAll('.filter-label');
-// const filterSection = document.getElementsByClassName('filter-section');
-// label.forEach((item, index) => {
-//     item.onclick = () => {
-//         if (filterSection[index].classList.contains(
-//                 'active')) {
-//             filterSection[index].classList.remove('active')
-//         } else {
-//             filterSection[index].classList.add('active')
-
-//         }
-
-//     }
-// })
-
 
 
 function renderAllSection(data, totalpages = 8) {
+    document.querySelector('.main').innerHTML = `
+    <div class="container">
+        </div>
+    `;
+    container = document.querySelector('.container');
     container.innerHTML = `
+        <div class = "all-title" >
+                <h3 >Danh sach tim kiem</h3>
+        </div>
 
         <div class="all-wrapper">
         <div class="all-section">
@@ -200,7 +209,7 @@ function renderAllSection(data, totalpages = 8) {
     lengthOfPagination = Math.ceil(data.length / totalpages);
     var paginationAdd = document.querySelector('.pagination ul');
     for (var i = 1; i <= lengthOfPagination; i++) {
-        paginationAdd.innerHTML += `<li>${i}</li>`
+        paginationAdd.innerHTML += `<li><a href="#">${i}</a></li>`
 
     }
     paginationAdd.innerHTML += '<div class="bar"></div>'
@@ -221,9 +230,13 @@ function renderAllSection(data, totalpages = 8) {
             if (index != currentPage)
                 currentPage = index;
             dataCurrent = data.slice(index * totalpages, (index + 1) * totalpages)
-            console.log(dataCurrent)
+            document.body.scrollTop = 0;
             renderAllContent(dataCurrent);
+
+
             colOnclick();
+            document.querySelector('.all-title').focus();
+
         }
 
     })
@@ -235,14 +248,14 @@ function renderAllContent(datas) {
     allSection.innerHTML = '';
     for (var data of datas) {
         allSection.innerHTML += `
-              <div class="col-lg" data-id=${data.id}>
+              <div class="col-lg" data-id=${data.ID}>
                   <div class="product-image">
-                      <img src="${data.image}">
+                      <img src="${data.img}">
                       <button class="plus-button"><i class="bi bi-plus"></i></button>
 
                   </div>
                   <div class="detail">
-                      <p>${data.name}</p>
+                      <p>${data.Name}</p>
                       <div class="rating">
                           <span><i class="bi bi-star-fill"></i></span>
                           <span><i class="bi bi-star-fill"></i></span>
@@ -250,10 +263,12 @@ function renderAllContent(datas) {
                           <span><i class="bi bi-star-fill"></i></span>
                           <span><i class="bi bi-star-fill"></i></span>
                       </div>
-                      <p><span>$${data.price}</span></p>
+                      <p><span>$${data.Price}</span></p>
 
                   </div>
               </div>
               `;
     }
 }
+
+//Cart
