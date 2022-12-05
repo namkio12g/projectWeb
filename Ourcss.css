@@ -25,20 +25,16 @@ h3 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* background-color: #071a6a; */
   z-index: 0;
 }
 
-.welcome-sction {
-}
 .swipe-image {
   margin: 5px 3px;
   position: relative;
   height: 550px;
   width: 100%;
   display: flex;
-  justify-content: center;
-  margin-left: 9px;
+  margin-left: 0.6%;
   z-index: 0;
   justify-content: center;
 }
@@ -56,7 +52,7 @@ h3 {
   width: 700px;
   font-size: 20px;
   font-weight: 500;
-  font-family: var(fontsans);
+  font-family: var(fontsans); 
 }
 .swipe-image .move-right-button {
   background-color: #fea300;

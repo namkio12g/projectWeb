@@ -4,7 +4,7 @@ if (khachhang != null) {
 
     document.querySelector('.resign a span').innerHTML = 'logout';
     document.querySelector('.sign_in a span').innerHTML = khachhang.TenKH;
-    document.querySelector('.sign_in a').onclick = "";
+    document.querySelector('.sign_in a').setAttribute('onclick', 'openCartList()');
     document.querySelector('.resign a').setAttribute('onclick', 'logout()');
 
 }
@@ -22,7 +22,6 @@ function signin() {
     checkusername = userlist.filter(function (user) {
         return user.Username == usernameinput
     });
-    console.log(checkusername);
     if (checkusername.length != 0 && checkusername[0].Password == passwordinput) {
 
         Swal.fire({
@@ -30,17 +29,25 @@ function signin() {
             title: 'Đăng nhập thành công',
             showConfirmButton: false,
         })
-        khachhang = {
-            TenKH: checkusername[0].Realname,
-            SDTKH: checkusername[0].SDT
+        if (checkusername[0].Level == 0) {
+
+            khachhang = {
+                TenKH: checkusername[0].Realname,
+                SDTKH: checkusername[0].SDT
+
+            }
+            window.localStorage.setItem("khachhang", JSON.stringify(khachhang))
+
+            setTimeout(() => {
+                location.href = "project.html";
+            }, 1000);
+        } else {
+
+            setTimeout(() => {
+                location.href = "Admin.html";
+            }, 1000);
 
         }
-        window.localStorage.setItem("khachhang", JSON.stringify(khachhang))
-
-        setTimeout(() => {
-            location.reload();
-        }, 1000);
-
     } else {
         Swal.fire({
             icon: 'error',

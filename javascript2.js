@@ -1,7 +1,7 @@
 var container = document.querySelector('.container');
 var move = 0;
 var moves = [];
-var branches = ['apple', 'samsung', 'xiaomi'];
+var branches = ['apple', 'samsung', 'xiaomi', 'oppo', 'redmi', 'nokia', 'vivo'];
 var collection = [];
 var ItemInterval = [];
 var lengthOfPagination = 0;
@@ -271,4 +271,80 @@ function renderAllContent(datas) {
     }
 }
 
-//Cart
+//Filters
+var BrandFilter = []
+document.querySelectorAll('.menu-brand-dropdown-list li').forEach((item, id) => {
+    item.onclick = () => {
+        if (BrandFilter.includes(item.dataset.name)) {
+            BrandFilter.splice(BrandFilter.indexOf(item.dataset.name), 1);
+            item.style.backgroundColor = '#000000';
+        } else {
+            BrandFilter.push(item.dataset.name)
+            item.style.backgroundColor = '#00ffff';
+        }
+        console.log(BrandFilter);
+        filterActive(data);
+    }
+})
+document.querySelectorAll('.menu-brand-dropdown-list li').forEach((item, id) => {
+    item.onclick = () => {
+        if (BrandFilter.includes(item.dataset.name)) {
+            BrandFilter.splice(BrandFilter.indexOf(item.dataset.name), 1);
+            item.style.backgroundColor = '#000000';
+        } else {
+            BrandFilter.push(item.dataset.name)
+            item.style.backgroundColor = '#00ffff';
+        }
+        console.log(BrandFilter);
+        filterActive();
+    }
+})
+var priceFilter = 0;
+var priceFilterindex = -1;
+document.querySelectorAll('.menu-price-dropdown-list li').forEach((item, id) => {
+    item.onclick = () => {
+        priceFilter = parseInt(item.dataset.price)
+        filterActive();
+        item.style.backgroundColor = '#00ffff';
+        if (priceFilterindex > -1)
+            document.querySelectorAll('.menu-price-dropdown-list li')[priceFilterindex].style.backgroundColor = '#000000';
+        priceFilterindex = id;
+        console.log(priceFilterindex)
+    }
+
+})
+var nameFilter = "";
+
+function searchName() {
+    nameFilter = document.getElementById("search-name").value;
+    if (nameFilter != "") {
+        filterActive();
+    }
+
+}
+
+function filterActive() {
+    var dataFilted = data;
+    if (BrandFilter.length != 0) {
+        dataFilted = [];
+    }
+    for (var brand of BrandFilter) {
+        dataFilted = dataFilted.concat(data.filter(item => item.Brand.toLowerCase() == brand))
+    }
+
+    if (priceFilter != 0) {
+        if (priceFilter > 10) {
+            dataFilted = dataFilted.filter(item => item.Price > 10000000)
+        } else {
+            dataFilted = dataFilted.filter(item => item.Price < priceFilter * 1000000)
+        }
+        console.log(dataFilted)
+    }
+    if (nameFilter != "") {
+        dataFilted = dataFilted.filter(item => item.Name.toLowerCase().includes(nameFilter))
+    }
+    if (dataFilted.length == 0) {
+
+    }
+    renderAllSection(dataFilted);
+}

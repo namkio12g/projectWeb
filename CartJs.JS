@@ -5,7 +5,6 @@
  var hoadonList = JSON.parse(window.localStorage.getItem("hoadon" || "[]"));
  var CTHDList = JSON.parse(window.localStorage.getItem("CTHD" || "[]"));
 
-
  var user = JSON.parse(window.localStorage.getItem("khachhang" || "[]"));
 
  function checkid(item, id) {
@@ -19,7 +18,6 @@
  }
  window.onbeforeunload = function (event) {
      window.localStorage.setItem("productsInCart", JSON.stringify(productsInCart));
-     console.log(productsInCart)
 
  };
 
@@ -62,7 +60,7 @@
     `;
      document.querySelector('.container').innerHTML = `
              <div class = "cart-container">
-                    <h1 class = "projTitle" style = "text-align: center;text-transform: uppercase;">Responsive Table<span>-Less</span>Shopping Cart</h1>
+                    <h1 class = "projTitle" style = "text-align: center;text-transform: uppercase;">Your Items</h1>
                     <div class = "heading">
                         <h1>My Cart</h1> 
                         <a href = "#" class = "cart-button" onclick = "location.reload()">Continue Shopping</a> 
@@ -169,37 +167,103 @@
              'error'
          )
      } else {
+         if (user == null) {
+             Swal.fire(
+                 'Not found user',
+                 'you need to login first',
+                 'error'
+             )
+         } else {
+             for (var i = 0; i < productsInCart.length; i++) {
+                 CTHDList.push({
+                     IDHD: productsInCart[i].IDHD,
+                     IDSP: productsInCart[i].IDSP,
+                     SL: productsInCart[i].amount
 
-         for (var i = 0; i < productsInCart.length; i++) {
-             CTHDList.push({
-                 IDHD: productsInCart[i].IDHD,
-                 IDSP: productsInCart[i].IDSP,
-                 SL: productsInCart[i].amount
+                 })
 
+             }
+             hoadonList.push({
+                 ID: idHD,
+                 TenKh: user.TenKh,
+                 SDTKH: user.SDTKH,
+                 Ngay: new Date().toLocaleDateString(),
+                 Tongtien: total,
+                 Tinhtrang: 'unprocessed'
              })
+             window.localStorage.setItem("CTHD", JSON.stringify(CTHDList));
+             window.localStorage.setItem("hoadon", JSON.stringify(hoadonList));
+
+             productsInCart = []
+             Swal.fire(
+                 'Success!',
+                 'Your invoice is processing',
+                 'success'
+             )
+             setTimeout(() => {
+                 location.reload();
+             }, 1000);
 
          }
-         hoadonList.push({
-             ID: idHD,
-             TenKh: 'name',
-             SDTKH: '123456',
-             Ngay: new Date().toLocaleDateString(),
-             Tongtien: total,
-             Tinhtrang: 'unprocessed'
-         })
-         window.localStorage.setItem("CTHD", JSON.stringify(CTHDList));
-         window.localStorage.setItem("hoadon", JSON.stringify(hoadonList));
-
-         productsInCart = []
-         Swal.fire(
-             'Success!',
-             'Your invoice is processing',
-             'success'
-         )
-         setTimeout(() => {
-             location.reload();
-         }, 1000);
-
      }
 
+ }
+
+ function openCartList() {
+     document.querySelector('.main').innerHTML = `
+    <div class="container">
+        </div>
+    `;
+     document.querySelector('.container').innerHTML = `
+             <div class = "cart-container">
+                    <h1 class = "projTitle" style = "text-align: center;text-transform: uppercase;">Your cart list</h1>
+                    <div class = "heading">
+                        <h1>My Carts</h1> 
+                        <a href = "#" class = "cart-button" onclick = "location.reload()">Continue Shopping</a> 
+                    </div> 
+                    <br>
+                    <br>
+                        <div class = "cart-section">
+
+                      
+                        
+
+
+                    </div> 
+                 
+                 </div>
+    `;
+     var cartSection = document.querySelector('.cart-section');
+     var HDlist = hoadonList.filter(item => item.SDTKH == user.SDTKH)
+     for (var a of HDlist) {
+         cartSection.innerHTML += `
+            
+            <div class="cart-tag">
+    <div class="cart-head" style="display: flex;flex-direction: row;width: fit-content;  justify-content: space-between;">
+        <div class="shopped-product" style="margin-left: 80px">
+
+            <h3> IDHD: <span>${a.ID}</span></h3>
+
+   
+               
+
+
+
+         </div>
+        
+         <h3>/ Tổng tiền: <span>${a.Tongtien}</span></h3>
+         
+
+     </div>
+        <div class="cart-tail">
+        <h4>Ngày đặt:<p>${a.Ngay}</p></h4>
+
+
+                 </div>
+
+
+            </div>
+            
+            `
+     }
  }
