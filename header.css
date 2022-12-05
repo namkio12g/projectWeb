@@ -86,7 +86,7 @@ header {
 }
 
 .menu li a span:hover {
-  background-color: #2d2d2d;
+  background-color: aqua;
   animation-delay: 30ms;
   animation-duration: 400ms;
   animation-name: specialFadeIn;
@@ -103,7 +103,6 @@ header {
 }
 
 .menu-brand-dropdown-list li:hover span {
-  color: #00ffff;
   background-color: #2d2d2d;
   animation-delay: 30ms;
   animation-duration: 400ms;

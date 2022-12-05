@@ -303,13 +303,21 @@ var priceFilter = 0;
 var priceFilterindex = -1;
 document.querySelectorAll('.menu-price-dropdown-list li').forEach((item, id) => {
     item.onclick = () => {
-        priceFilter = parseInt(item.dataset.price)
+        if (priceFilterindex != id) {
+
+
+            priceFilter = parseInt(item.dataset.price)
+        } else {
+            priceFilter = 0;
+        }
         filterActive();
         item.style.backgroundColor = '#00ffff';
-        if (priceFilterindex > -1)
+        if (priceFilterindex > -1) {
             document.querySelectorAll('.menu-price-dropdown-list li')[priceFilterindex].style.backgroundColor = '#000000';
+        }
+
         priceFilterindex = id;
-        console.log(priceFilterindex)
+
     }
 
 })
@@ -341,7 +349,7 @@ function filterActive() {
         console.log(dataFilted)
     }
     if (nameFilter != "") {
-        dataFilted = dataFilted.filter(item => item.Name.toLowerCase().includes(nameFilter))
+        dataFilted = dataFilted.filter(item => item.Name.toLowerCase().includes(nameFilter.toLowerCase()))
     }
     if (dataFilted.length == 0) {
 

@@ -40,12 +40,36 @@ function signin() {
 
             setTimeout(() => {
                 location.href = "project.html";
-            }, 1000);
+            }, 500);
         } else {
+            Swal.fire({
+                title: 'You are admin',
+                text: "do you want to go admin page!",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes !'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    setTimeout(() => {
+                        location.href = "Admin.html";
+                    }, 500);
 
-            setTimeout(() => {
-                location.href = "Admin.html";
-            }, 1000);
+                } else {
+                    khachhang = {
+                        TenKH: checkusername[0].Realname,
+                        SDTKH: checkusername[0].SDT
+
+                    }
+                    window.localStorage.setItem("khachhang", JSON.stringify(khachhang))
+
+                    setTimeout(() => {
+                        location.href = "project.html";
+                    }, 500);
+                }
+            })
+
 
         }
     } else {
