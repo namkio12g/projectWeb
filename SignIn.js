@@ -93,7 +93,7 @@ function checkResign() {
     if (usernameinput.value == "") {
         Swal.fire({
             icon: 'error',
-            title: 'valid username',
+            title: 'invalid username',
             showConfirmButton: false,
             timer: 1000
         })
@@ -105,7 +105,7 @@ function checkResign() {
     if (realname.value == "") {
         Swal.fire({
             icon: 'error',
-            title: 'valid realname',
+            title: 'invalid realname',
             showConfirmButton: false,
             timer: 1000
         })
@@ -117,7 +117,7 @@ function checkResign() {
     if (phone.value == "" || isNaN(phone.value) || parseInt(phone.value) < 0) {
         Swal.fire({
             icon: 'error',
-            title: 'valid Phone number',
+            title: 'invalid Phone number',
             showConfirmButton: false,
             timer: 1000
         })
@@ -129,7 +129,7 @@ function checkResign() {
     if (passwordinput.value == "") {
         Swal.fire({
             icon: 'error',
-            title: 'valid password',
+            title: 'invalid password',
             showConfirmButton: false,
             timer: 1000
         })
@@ -165,7 +165,12 @@ function checkResign() {
     });
     console.log(checkDouble);
     if (checkDouble.length != 0) {
-        alert("user da ton tai")
+        Swal.fire({
+            icon: 'error',
+            title: 'user đã tồn tại',
+            showConfirmButton: false,
+            timer: 1000
+        })
         usernameinput.focus();
         return false;
     }
@@ -182,7 +187,12 @@ function resign() {
         var passwordinput = document.getElementById("passwordtxt1").value;
         var cfpassword = document.getElementById("cfpasswordtxt").value;
         if (passwordinput != cfpassword) {
-            alert("Sai mật khẩu");
+            Swal.fire({
+                icon: 'error',
+                title: 'sai mật khẩu',
+                showConfirmButton: false,
+                timer: 1000
+            })
         } else {
             var user = {
                 Username: usernameinput,
@@ -193,7 +203,13 @@ function resign() {
             }
             userlist.push(user);
             localStorage.setItem("user", JSON.stringify(userlist));
-            alert("Đăng ký thành công");
+            Swal.fire({
+                icon: 'success',
+                title: 'đăng ký thành công',
+                showConfirmButton: false,
+                timer: 1000
+            })
+            closeform()
         }
     }
 }

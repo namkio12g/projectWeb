@@ -189,7 +189,7 @@ function renderAllSection(data, totalpages = 8) {
     container = document.querySelector('.container');
     container.innerHTML = `
         <div class = "all-title" >
-                <h3 >Danh sach tim kiem</h3>
+                <h3 >Search list</h3>
         </div>
 
         <div class="all-wrapper">

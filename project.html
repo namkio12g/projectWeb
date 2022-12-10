@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="branchSectionJs.css">
     <link rel="stylesheet" href="header.css">
     <!-- Bootstrap Font Icon CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="sweetalert2.all.min.js"></script>
@@ -32,6 +36,10 @@
                     <a href="">
                         <img src="images/logo.png">
                     </a>
+                </div>
+
+                <div id="toggle">
+                    <i class="fas fa-bars"></i>
                 </div>
 
                 <ul class="menu">
@@ -98,8 +106,7 @@
                         </a>
                     </li>
 
-
-
+                    ]
                     <!-- <li class="menu_phoneType">
                         <a href="#"
                             style="position: relative;overflow: visible;font-family: Arial, Helvetica, sans-serif;">
@@ -191,7 +198,7 @@
                 <ul class="sign_resign">
                     <li class="resign">
                         <a href="#" style="font-family: Arial, Helvetica, sans-serif;" onclick="openformResign()">
-                            <span>Resign</span>
+                            <span>Register</span>
                         </a>
                     </li>
 
@@ -203,6 +210,14 @@
                 </ul>
 
             </div>
+
+            <script>
+                $(document).ready(function () {
+                    $('#toggle').click(function () {
+                        $('.menu').slideToggle();
+                    })
+                })
+            </script>
         </header>
 
         <div class="main">
@@ -248,7 +263,7 @@
                         <img src="image/samsungbranch.webp" alt="">
                         <div class="branch-title">
                             <h3> Samsung</h3>
-                            <p>Lorem ipsum dolor sit amet</p>
+                            <p>Best Seller 2022</p>
                         </div>
 
 
@@ -261,7 +276,7 @@
                         <div class="branch-title"></div>
                         <div class="branch-title">
                             <h3> Xiaomi</h3>
-                            <p>Lorem ipsum dolor sit amet</p>
+                            <p>China phone 2022 </p>
                         </div>
 
                     </a>
@@ -271,7 +286,7 @@
                         <img src="image/iphonebranch.jpg" alt="">
                         <div class="branch-title">
                             <h3> Apple</h3>
-                            <p>Lorem ipsum dolor sit amet</p>
+                            <p>Rich phone brand</p>
                         </div>
 
 
@@ -280,7 +295,7 @@
                         <img src="image/iphonebranch.jpg" alt="">
                         <div class="branch-title">
                             <h3> Oppo</h3>
-                            <p>Lorem ipsum dolor sit amet</p>
+                            <p>Happy with us</p>
                         </div>
 
 
@@ -306,10 +321,56 @@
 
 
 
-        <div class="footer">
+        <div class="footer" style="background-color:rgb(205, 203, 203) ;width: 100%">
+            <table style="width: 100% ;">
+                <tr>
+                    <th>
+                        <h4>CÔNG TY THƯƠNG MẠI 3TM</h4>
+                    </th>
+                    <th>
+                        <h4>HỆ THỐNG CỬA HÀNG: </h4>
+                    </th>
+                </tr>
+
+                <tr>
+                    <th>Chăm sóc khách hàng liên hệ: <i>0776711376</i></th>
+                    <th>Chi nhánh Quận 5: Đại học Sài Gòn SGU</th>
+                </tr>
+
+                <tr>
+                    <th>Mua hàng qua số điện thoại:<i> 0776711367</th>
+                    <th>Chi nhánh Bình Tân: Hẻm 55/22, đường số 12, Bình Hưng Hòa.</th>
+
+                </tr>
+
+                <tr>
+                    <th>Trung tâm bảo hành: Trường Đại Học Sài Gòn SGU </th>
+                    <th>
+                        <p></p>
+                    </th>
+
+                </tr>
+
+                <tr>
+                    <th>Cam kết uy tín đặt lên hàng đầu!. Thân ái.</th>
+                    <th>
+                        <p></p>
+                    </th>
+                </tr>
+
+                <tr>
+                    <th>
+                        <p></p>
+                    </th>
+                    <th> <i>-WEB sở hữu bởi tập đoàn 3TM-</i></th>
+                </tr>
 
 
 
+
+
+
+            </table>
         </div>
 
 
@@ -367,22 +428,31 @@
         <div class="popup-container" id="popup">
             <form class="popup-form" method="post" id="sign-in-form" enctype="multipart/form-data">
                 <div class="closefrm" onClick="closeform()">+</div>
-                <div class="sign-in-input" id="userinput">
-                    <input type="text" placeholder="Username" id="usernametxt">
-                    <input type="password" placeholder="Password" id="passwordtxt">
-                    <input type="button" value="Sign In" onclick="signin()">
+                <div class="imgcontainer">
+                    <img src="img_avatar2.png" alt="Avatar" class="avatar">
+                </div>
+                <div class="sign-in-input" id="userinput" style="background-color:#f1f1f1">
+                    <label for="uname"
+                        style="font-family: Arial, Helvetica, sans-serif;font-size: 25px;"><b>Username</b></label>
+                    <input type="text" placeholder="Username" id="usernametxt" style="width: 99%">
+                    <label for="psw"
+                        style="font-family: Arial, Helvetica, sans-serif;font-size: 25px;"><b>Password</b></label>
+                    <input type="password" placeholder="Password" id="passwordtxt" style="width: 99%;">
+                    <input type="button" value="Sign In " onclick="signin()">
                 </div>
             </form>
 
             <form class="popup-form" method="post" id="resign-form" enctype="multipart/form-data">
                 <div class="closefrm" onClick="closeform()">+</div>
                 <div class="sign-in-input">
+                    <label for="usernametxt1"
+                        style="font-family: Arial, Helvetica, sans-serif;font-size: 25px;"><b>username</b></label>
                     <input type="text" placeholder="Username" id="usernametxt1">
                     <input type="text" placeholder="Realname" id="realnametxt">
                     <input type="text" placeholder="Phone" id="phonetxt">
                     <input type="password" placeholder="Password" id="passwordtxt1">
                     <input type="password" placeholder="Confirm Password" id="cfpasswordtxt">
-                    <input type="button" value="Resign" onclick="resign()">
+                    <input type="button" value="Register" onclick="resign()">
                 </div>
             </form>
         </div>

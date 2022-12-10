@@ -1,9 +1,8 @@
  var productsInCart = JSON.parse(window.localStorage.getItem("productsInCart" || "[]"));
-
-
  var user = JSON.parse(window.localStorage.getItem("khachhang" || "[]"));
  var hoadonList = JSON.parse(window.localStorage.getItem("hoadon" || "[]"));
  var CTHDList = JSON.parse(window.localStorage.getItem("CTHD" || "[]"));
+
 
  var user = JSON.parse(window.localStorage.getItem("khachhang" || "[]"));
 
@@ -185,7 +184,7 @@
              }
              hoadonList.push({
                  ID: idHD,
-                 TenKh: user.TenKh,
+                 TenKH: user.TenKH,
                  SDTKH: user.SDTKH,
                  Ngay: new Date().toLocaleDateString(),
                  Tongtien: total,
@@ -257,9 +256,13 @@
      </div>
         <div class="cart-tail">
         <h4>Ngày đặt:<p>${a.Ngay}</p></h4>
+        
 
 
                  </div>
+        <div style="margin-right:10px ">
+            <h4>${a.Tinhtrang}</h4>
+        </div>
 
 
             </div>

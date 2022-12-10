@@ -22,54 +22,90 @@ function opennew(btn) {
 	document.getElementById('adduserform').style.display = 'none';
 	document.getElementById('addphoneform').style.display = 'block';
 }
+window.onload = getallphone();
+
 function closeform() {
 	document.getElementById('addphone').style.display = 'none';
 }
+
 function checkinput() {
-	if (document.getElementById('phoneid').value == "") {
-		alert("phone ID NULL");
+	var id = document.getElementById('phoneid');
+	var name = document.getElementById('phonename');
+	var price = document.getElementById('phoneprice');
+	var brand = document.getElementById('phonebrand');
+	var os = document.getElementById('phoneos')
+	if (id.value == "") {
+		alert("Invalid phone ID ");
+		id.focus();
 		return false;
 	}
-	if (document.getElementById('phonename').value == "") {
-		alert("phone Name NULL");
+	if (name.value == "") {
+		alert("Invalid phone Name");
+		name.focus();
 		return false;
 	}
-	if (document.getElementById('phoneprice').value == "") {
-		alert("phone price NULL");
+	if (price.value == "" || isNaN(price.value) || parseInt(price.value) <= 0) {
+		alert("Invalid phone price");
+		price.focus();
 		return false;
 	}
-	if (document.getElementById('phonebrand').value == "") {
-		alert("phone brand NULL");
+	if (os.value == "") {
+		alert("Invalid phone OS");
+		os.focus();
 		return false;
 	}
-	if (document.getElementById('phoneos').value == "") {
-		alert("phone OS NULL");
+	if (brand.value == "") {
+		alert("Invalid phone brand");
+		brand.focus();
 		return false;
 	}
 	return true;
 }
+
 function getallphone() {
 	var hst = document.getElementById("phonetable");
 	var arr = JSON.parse(localStorage.getItem("phone"));
 	if (arr == null) {
-		var phone = [
-			{ ID: "6001", Name: "IPX", Price: "3000", OS: "IOS", Brand: "Apple", img: "image/phone.jpg" },
-			{ ID: "7451", Name: "SamsungA12", Price: "2000", OS: "Android", Brand: "Samsung", img: "image/phone.jpg" },
-			{ ID: "713", Name: "IP11", Price: "4000", OS: "IOS", Brand: "Apple", img: "image/phone.jpg" },
+		var phone = [{
+				ID: "6001",
+				Name: "IPX",
+				Price: "3000",
+				OS: "IOS",
+				Brand: "Apple",
+				img: "image/phone.jpg"
+			},
+			{
+				ID: "7451",
+				Name: "SamsungA12",
+				Price: "2000",
+				OS: "Android",
+				Brand: "Samsung",
+				img: "image/phone.jpg"
+			},
+			{
+				ID: "713",
+				Name: "IP11",
+				Price: "4000",
+				OS: "IOS",
+				Brand: "Apple",
+				img: "image/phone.jpg"
+			},
 		];
 		localStorage.setItem("phone", JSON.stringify(phone));
 	}
+	delrow(hst);
 	var retrievedPhone = JSON.parse(localStorage.getItem("phone"));
 	for (var i = 0; i < retrievedPhone.length; i++) {
-		hst.innerHTML += "<tr><td>" + retrievedPhone[i].ID + "</td><td>"
-			+ retrievedPhone[i].Name + "</td><td> "
-			+ retrievedPhone[i].Price + "</td><td>"
-			+ retrievedPhone[i].OS + "</td><td>"
-			+ retrievedPhone[i].Brand + "</td><td><img src="
-			+ retrievedPhone[i].img + " width = 100 height = 100></td><td><a href='#'><i id='editphone' onclick='opennew(this)' class='fa-solid fa-pen-nib'></i></a>"
-			+ "<a href='#'<i onclick='delphone()' class='fa-solid fa-trash'></i></a></td>" + "</td></tr>";
+		hst.innerHTML += "<tr><td>" + retrievedPhone[i].ID + "</td><td>" +
+			retrievedPhone[i].Name + "</td><td> " +
+			retrievedPhone[i].Price + "</td><td>" +
+			retrievedPhone[i].OS + "</td><td>" +
+			retrievedPhone[i].Brand + "</td><td><img src=" +
+			retrievedPhone[i].img + " width = 100 height = 100></td><td><a href='#'><i id='editphone' onclick='opennew(this)' class='fa-solid fa-pen-nib'></i></a>" +
+			"<a href='#'<i onclick='delphone()' class='fa-solid fa-trash'></i></a></td>" + "</td></tr>";
 	}
 }
+
 function delphone() {
 	if (confirm('Are you sure ?')) {
 		var table = document.getElementById('phonetable');
@@ -77,7 +113,9 @@ function delphone() {
 		for (var i = 1; i < table.rows.length; i++) {
 			table.rows[i].onclick = function () {
 				var phoneid = this.cells[0].innerHTML;
-				var filteredArray = retrievedPhone.filter(function (phone) { return phone.ID !== phoneid })
+				var filteredArray = retrievedPhone.filter(function (phone) {
+					return phone.ID !== phoneid
+				})
 				localStorage.setItem("phone", JSON.stringify(filteredArray));
 				delrow(table);
 				getallphone();
@@ -85,6 +123,7 @@ function delphone() {
 		}
 	}
 }
+
 function phoneaction() {
 	if (checkinput()) {
 		var pimg = "";
@@ -110,8 +149,7 @@ function phoneaction() {
 		if (action == "newphone") {
 			retrievedPhone.push(newp);
 			localStorage.setItem("phone", JSON.stringify(retrievedPhone));
-		}
-		else {
+		} else {
 			for (var i = 0; i < retrievedPhone.length; i++) {
 				var editphone = retrievedPhone[i];
 				if (editphone.ID == pid) {
@@ -130,6 +168,7 @@ function phoneaction() {
 		getallphone();
 	}
 }
+
 function openphone() {
 	var hd = document.getElementById('hdtbl');
 	var p = document.getElementById('ptbl');
@@ -140,9 +179,11 @@ function openphone() {
 		hd.style.display = "none";
 		u.style.display = "none";
 		s.style.display = "none";
+		getallphone();
 		p.style.display = "block";
 	}
 }
+
 function openhd() {
 	var hd = document.getElementById('hdtbl');
 	var s = document.getElementById("statistictbl");
@@ -153,13 +194,16 @@ function openhd() {
 		p.style.display = "none";
 		s.style.display = "none";
 		u.style.display = "none";
+		getallhd();
 		hd.style.display = "block";
 	}
 }
+
 function preview() {
 	var img = document.getElementById('phoneimg');
 	img.src = URL.createObjectURL(event.target.files[0]);
 }
+
 function getphone(phone) {
 	document.getElementById('phoneid').disabled = true;
 	document.getElementById('phoneid').value = phone.ID;
@@ -169,10 +213,12 @@ function getphone(phone) {
 	document.getElementById('phoneos').value = phone.OS;
 	document.getElementById('phoneimg').src = phone.img;
 }
+
 function delimg() {
 	document.getElementById('phoneimg').src = "";
 	document.getElementById('phoneimgupload').value = "";
 }
+
 function clearinput() {
 	document.getElementById('phoneid').disabled = false;
 	document.getElementById('phoneid').value = "";
@@ -182,6 +228,7 @@ function clearinput() {
 	document.getElementById('phonebrand').value = "";
 	document.getElementById('phoneimg').src = "";
 }
+
 function editp() {
 	var table = document.getElementById('phonetable');
 	for (var i = 1; i < table.rows.length; i++) {
@@ -192,28 +239,34 @@ function editp() {
 		};
 	}
 }
+
 function checkid(phone) {
 	var searchtxt = document.getElementById("searchtxt").value;
 	return phone.ID === searchtxt;
 }
+
 function checkname(phone) {
 	var searchtxt = document.getElementById("searchtxt").value;
 	return phone.Name.toLowerCase().includes(searchtxt.toLowerCase());
 }
+
 function checkbrand(phone) {
 	var searchtxt = document.getElementById("searchtxt").value;
 	return phone.Brand.toLowerCase().includes(searchtxt.toLowerCase());
 }
+
 function checkos(phone) {
 	var searchtxt = document.getElementById("searchtxt").value;
 	return phone.OS.toLowerCase().includes(searchtxt.toLowerCase());
 }
+
 function delrow(myTable) {
 	var rowCount = myTable.rows.length;
 	for (var x = rowCount - 1; x > 0; x--) {
 		myTable.deleteRow(x);
 	}
 }
+
 function search() {
 	var allp = JSON.parse(localStorage.getItem("phone"));
 	var table = document.getElementById("phonetable");
@@ -235,13 +288,13 @@ function search() {
 			break;
 	}
 	for (var i = 0; i < retrievedPhone.length; i++) {
-		table.innerHTML += "<tr><td>" + retrievedPhone[i].ID + "</td><td>"
-			+ retrievedPhone[i].Name + "</td><td> "
-			+ retrievedPhone[i].Price + "</td><td>"
-			+ retrievedPhone[i].OS + "</td><td>"
-			+ retrievedPhone[i].Brand + "</td><td><img src="
-			+ retrievedPhone[i].img + " width = 100 height = 100></td><td><a href='#'><i id='editphone' onclick='opennew(this)' class='fa-solid fa-pen-nib'></i></a>"
-			+ "<a href='#'<i onclick='delphone()' class='fa-solid fa-trash'></i></a></td>" + "</td></tr>";
+		table.innerHTML += "<tr><td>" + retrievedPhone[i].ID + "</td><td>" +
+			retrievedPhone[i].Name + "</td><td> " +
+			retrievedPhone[i].Price + "</td><td>" +
+			retrievedPhone[i].OS + "</td><td>" +
+			retrievedPhone[i].Brand + "</td><td><img src=" +
+			retrievedPhone[i].img + " width = 100 height = 100></td><td><a href='#'><i id='editphone' onclick='opennew(this)' class='fa-solid fa-pen-nib'></i></a>" +
+			"<a href='#'<i onclick='delphone()' class='fa-solid fa-trash'></i></a></td>" + "</td></tr>";
 	}
 }
 //--------------------------HOADON'S SCRIPT------------------------------------------------------------------//
@@ -250,49 +303,73 @@ function getallhd() {
 	var hst = document.getElementById("hdtable");
 	var arr = JSON.parse(localStorage.getItem("hoadon"));
 	if (arr == null) {
-		var hoadon = [
-			{ ID: "001", TenKH: "NguyenVanA", SDTKH: "3000", Ngay: "2018/01/11", Tongtien: 700, Tinhtrang: "processed" },
-			{ ID: "004", TenKH: "NguyenVanB", SDTKH: "090325761", Ngay: "2022/09/10", Tongtien: 1200, Tinhtrang: "unprocessed" },
-			{ ID: "007", TenKH: "TranVanC", SDTKH: "090784261", Ngay: "2018/03/11", Tongtien: 3600, Tinhtrang: "unprocessed" },
+		var hoadon = [{
+				ID: "001",
+				TenKH: "NguyenVanA",
+				SDTKH: "3000",
+				Ngay: "2018/01/11",
+				Tongtien: 700,
+				Tinhtrang: "processed"
+			},
+			{
+				ID: "004",
+				TenKH: "NguyenVanB",
+				SDTKH: "090325761",
+				Ngay: "2022/09/10",
+				Tongtien: 1200,
+				Tinhtrang: "unprocessed"
+			},
+			{
+				ID: "007",
+				TenKH: "TranVanC",
+				SDTKH: "090784261",
+				Ngay: "2018/03/11",
+				Tongtien: 3600,
+				Tinhtrang: "unprocessed"
+			},
 		];
 		localStorage.setItem("hoadon", JSON.stringify(hoadon));
 	}
+	delrow(hst);
 	var retrievedPhone = JSON.parse(localStorage.getItem("hoadon"));
 	for (var i = 0; i < retrievedPhone.length; i++) {
-		hst.innerHTML += "<tr><td>" + retrievedPhone[i].ID + "</td><td>"
-			+ retrievedPhone[i].TenKH + "</td><td> "
-			+ retrievedPhone[i].SDTKH + "</td><td>"
-			+ retrievedPhone[i].Ngay + "</td><td>"
-			+ retrievedPhone[i].Tongtien + "</td>"
-			+ "<td><a href='#' id='edithd' onclick='hdopennew(this)'>" + retrievedPhone[i].Tinhtrang + "</a></td>"
-			+ "<td><a href='#'<i class='fa-solid fa-receipt' id='newcthd' onclick='cthdopennew(this)' ></i></a>"
-			+ "<a href='#'<i onclick='delhd()' class='fa-solid fa-trash'></i></a></td></tr>";
+		hst.innerHTML += "<tr><td>" + retrievedPhone[i].ID + "</td><td>" +
+			retrievedPhone[i].TenKH + "</td><td> " +
+			retrievedPhone[i].SDTKH + "</td><td>" +
+			retrievedPhone[i].Ngay + "</td><td>" +
+			retrievedPhone[i].Tongtien + "</td>" +
+			"<td><a href='#' id='edithd' onclick='hdopennew(this)'>" + retrievedPhone[i].Tinhtrang + "</a></td>" +
+			"<td><a href='#'<i class='fa-solid fa-receipt' id='newcthd' onclick='cthdopennew(this)' ></i></a>" +
+			"<a href='#'<i onclick='delhd()' class='fa-solid fa-trash'></i></a></td></tr>";
 	}
 
 }
+
 function hdopennew(btn) {
 	hdaction = btn.id.toString();
 	if (hdaction == "newhd") {
 		hdclearinput();
-	}
-	else
+	} else
 		edithd();
 	document.getElementById('addphoneform').style.display = 'none';
 	document.getElementById('addphone').style.display = 'flex';
 	document.getElementById('addhdform').style.display = 'block';
 	document.getElementById('cthdform').style.display = 'none';
 }
+
 function edithd() {
 	var retrievedhd = JSON.parse(localStorage.getItem("hoadon"));
 	var table = document.getElementById('hdtable');
 	for (var i = 1; i < table.rows.length; i++) {
 		table.rows[i].onclick = function () {
 			var hdid = this.cells[0].innerHTML;
-			let hoadon = retrievedhd.find(hoadon => hoadon.ID === hdid);
+			let hoadon = retrievedhd.find(hoadon => hoadon.ID == hdid);
+			console.log(hoadon)
 			gethd(hoadon);
 		};
 	}
 }
+
 function gethd(hoadon) {
 	document.getElementById('hdid').disabled = true;
 	document.getElementById('hdid').value = hoadon.ID;
@@ -305,6 +382,7 @@ function gethd(hoadon) {
 	else
 		document.getElementById('tinhtrang').checked = false;
 }
+
 function hdclearinput() {
 	document.getElementById('hdid').value = "";
 	document.getElementById('TenKH').value = "";
@@ -313,26 +391,32 @@ function hdclearinput() {
 	document.getElementById('Tongtien').value = "";
 	document.getElementById('tinhtrang').checked = false;
 }
+
 function checkhdid(hd) {
 	var searchtxt = document.getElementById("searchhdtxt").value;
 	return hd.ID === searchtxt;
 }
+
 function checktenkh(hd) {
 	var searchtxt = document.getElementById("searchhdtxt").value;
 	return hd.TenKH.toLowerCase().includes(searchtxt.toLowerCase());
 }
+
 function checksdtkh(hd) {
 	var searchtxt = document.getElementById("searchhdtxt").value;
 	return hd.SDTKH.toLowerCase().includes(searchtxt.toLowerCase());
 }
+
 function checkngay(hd) {
 	var searchtxt = document.getElementById("searchhdtxt").value;
 	return hd.Ngay.toLowerCase().includes(searchtxt.toLowerCase());
 }
+
 function checktinhtrang(hd) {
 	var searchtxt = document.getElementById("searchhdtxt").value;
 	return hd.Tinhtrang.toLowerCase().includes(searchtxt.toLowerCase());
 }
+
 function hdsearch() {
 	var allp = JSON.parse(localStorage.getItem("hoadon"));
 	var table = document.getElementById("hdtable");
@@ -357,16 +441,17 @@ function hdsearch() {
 			break;
 	}
 	for (var i = 0; i < retrievedPhone.length; i++) {
-		table.innerHTML += "<tr><td>" + retrievedPhone[i].ID + "</td><td>"
-			+ retrievedPhone[i].TenKH + "</td><td> "
-			+ retrievedPhone[i].SDTKH + "</td><td>"
-			+ retrievedPhone[i].Ngay + "</td><td>"
-			+ retrievedPhone[i].Tongtien + "</td>"
-			+ "<td><a href='#' id='edithd' onclick='hdopennew(this)'>" + retrievedPhone[i].Tinhtrang + "</a></td>"
-			+ "<td><a href='#'<i class='fa-solid fa-receipt' id='newcthd' onclick='cthdopennew(this)' ></i></a>"
-			+ "<a href='#'<i onclick='delhd()' class='fa-solid fa-trash'></i></a></td></tr>";
+		table.innerHTML += "<tr><td>" + retrievedPhone[i].ID + "</td><td>" +
+			retrievedPhone[i].TenKH + "</td><td> " +
+			retrievedPhone[i].SDTKH + "</td><td>" +
+			retrievedPhone[i].Ngay + "</td><td>" +
+			retrievedPhone[i].Tongtien + "</td>" +
+			"<td><a href='#' id='edithd' onclick='hdopennew(this)'>" + retrievedPhone[i].Tinhtrang + "</a></td>" +
+			"<td><a href='#'<i class='fa-solid fa-receipt' id='newcthd' onclick='cthdopennew(this)' ></i></a>" +
+			"<a href='#'<i onclick='delhd()' class='fa-solid fa-trash'></i></a></td></tr>";
 	}
 }
+
 function delhd() {
 	if (confirm('Are you sure ?')) {
 		var table = document.getElementById('hdtable');
@@ -374,10 +459,14 @@ function delhd() {
 		for (var i = 1; i < table.rows.length; i++) {
 			table.rows[i].onclick = function () {
 				var hdid = this.cells[0].innerHTML;
-				var filteredArray = arr.filter(function (hoadon) { return hoadon.ID != hdid })
+				var filteredArray = arr.filter(function (hoadon) {
+					return hoadon.ID != hdid
+				})
 				localStorage.setItem("hoadon", JSON.stringify(filteredArray));
 				var CTHDarr = JSON.parse(localStorage.getItem("cthd"));
-				var filteredArray2 = CTHDarr.filter(function (cthd) { return cthd.IDHD != hdid })
+				var filteredArray2 = CTHDarr.filter(function (cthd) {
+					return cthd.IDHD != hdid
+				})
 				localStorage.setItem("hoadon", JSON.stringify(filteredArray));
 				localStorage.setItem("cthd", JSON.stringify(filteredArray2));
 				delrow(table);
@@ -387,6 +476,7 @@ function delhd() {
 	}
 
 }
+
 function hdformaction() {
 	var hdid = document.getElementById('hdid').value;
 	var tenkh = document.getElementById('TenKH').value;
@@ -409,8 +499,7 @@ function hdformaction() {
 	if (hdaction == "newhd") {
 		retrievedhd.push(newhd);
 		localStorage.setItem("hoadon", JSON.stringify(retrievedhd));
-	}
-	else {
+	} else {
 		for (var i = 0; i < retrievedhd.length; i++) {
 			var editphone = retrievedhd[i];
 			if (editphone.ID == hdid) {
@@ -435,36 +524,68 @@ function cthdopennew(btn) {
 	document.getElementById('addhdform').style.display = 'none';
 	document.getElementById('adduserform').style.display = 'none';
 	document.getElementById('cthdform').style.display = 'block';
+	intcthd();
 	cthdonclick();
 }
+
 function intcthd() {
 	var arr = JSON.parse(localStorage.getItem("cthd"));
 	if (arr == null) {
-		var cthd = [
-			{ IDHD: "001", IDSP: "6001", SL: 1 },
-			{ IDHD: "001", IDSP: "7451", SL: 2 },
-			{ IDHD: "004", IDSP: "6001", SL: 1 },
-			{ IDHD: "004", IDSP: "713", SL: 1 },
-			{ IDHD: "004", IDSP: "7451", SL: 1 },
-			{ IDHD: "007", IDSP: "713", SL: 1 },
-			{ IDHD: "007", IDSP: "6001", SL: 3 },
+		var cthd = [{
+				IDHD: "001",
+				IDSP: "6001",
+				SL: 1
+			},
+			{
+				IDHD: "001",
+				IDSP: "7451",
+				SL: 2
+			},
+			{
+				IDHD: "004",
+				IDSP: "6001",
+				SL: 1
+			},
+			{
+				IDHD: "004",
+				IDSP: "713",
+				SL: 1
+			},
+			{
+				IDHD: "004",
+				IDSP: "7451",
+				SL: 1
+			},
+			{
+				IDHD: "007",
+				IDSP: "713",
+				SL: 1
+			},
+			{
+				IDHD: "007",
+				IDSP: "6001",
+				SL: 3
+			},
 		];
 		localStorage.setItem("cthd", JSON.stringify(cthd));
 	}
 }
+
 function getcthd(hdid) {
 	var table = document.getElementById('cthdtable');
 	delrow(table);
 	var retrievedPhone = JSON.parse(localStorage.getItem("phone"));
 	var arr = JSON.parse(localStorage.getItem("cthd"));
-	var filteredArray = arr.filter(function (cthd) { return cthd.IDHD == hdid });
+	var filteredArray = arr.filter(function (cthd) {
+		return cthd.IDHD == hdid
+	});
 	for (var i = 0; i < filteredArray.length; i++) {
 		let foundphone = retrievedPhone.find(phone => phone.ID === filteredArray[i].IDSP);
-		table.innerHTML += "<tr><td>" + filteredArray[i].IDSP + "</td><td>"
-			+ foundphone.Name + "</td><td>"
-			+ filteredArray[i].SL + "</td><td> "
-			+ foundphone.Price + "</td><td>"
-			+ "<a href='#'<i onclick='delSPfromCTHD()' class='fa-solid fa-trash'></i></a></td></tr>";
+		table.innerHTML += "<tr><td>" + filteredArray[i].IDSP + "</td><td>" +
+			foundphone.Name + "</td><td>" +
+			filteredArray[i].SL + "</td><td> " +
+			foundphone.Price + "</td><td>" +
+			"<a href='#'<i onclick='delSPfromCTHD()' class='fa-solid fa-trash'></i></a></td></tr>";
 	}
 
 	var total = caltongtien();
@@ -472,6 +593,7 @@ function getcthd(hdid) {
 	document.getElementById("cthdid").innerHTML = "ID HoaDon: " + filteredArray[0].IDHD;
 	settotal(filteredArray[0].IDHD, total);
 }
+
 function cthdonclick() {
 	var table = document.getElementById('hdtable');
 	for (var i = 1; i < table.rows.length; i++) {
@@ -481,6 +603,7 @@ function cthdonclick() {
 		}
 	}
 }
+
 function delSPfromCTHD() {
 	var table = document.getElementById("cthdtable");
 	var arr = JSON.parse(localStorage.getItem("cthd"));
@@ -489,7 +612,9 @@ function delSPfromCTHD() {
 	for (var i = 1; i < table.rows.length; i++) {
 		table.rows[i].onclick = function () {
 			var spid = this.cells[0].innerHTML;
-			var filteredArray = arr.filter(function (cthd) { return cthd.IDSP != spid || cthd.IDHD != id });
+			var filteredArray = arr.filter(function (cthd) {
+				return cthd.IDSP != spid || cthd.IDHD != id
+			});
 			delrow(table);
 			localStorage.setItem("cthd", JSON.stringify(filteredArray));
 			getcthd(id);
@@ -498,6 +623,7 @@ function delSPfromCTHD() {
 	var total = caltongtien();
 	settotal(id, total);
 }
+
 function settotal(idhd, tongtien) {
 	var retrievedhd = JSON.parse(localStorage.getItem("hoadon"));
 	for (var i = 0; i < retrievedhd.length; i++) {
@@ -509,11 +635,13 @@ function settotal(idhd, tongtien) {
 		}
 	}
 }
+
 function closeformcthd() {
 	delrow(document.getElementById("hdtable"));
 	getallhd();
 	document.getElementById('addphone').style.display = 'none';
 }
+
 function caltongtien() {
 	var table = document.getElementById('cthdtable');
 	var total = 0;
@@ -527,6 +655,7 @@ function caltongtien() {
 }
 //---------------------------------------------------USER's SCRIPT-----------------------------------------------
 var useraction = "";
+
 function openuser() {
 	var hd = document.getElementById('hdtbl');
 	var p = document.getElementById('ptbl');
@@ -541,17 +670,18 @@ function openuser() {
 	}
 	getalluser();
 }
+
 function userclearinput() {
 	document.getElementById('username').value = "";
 	document.getElementById('password').value = "";
 	document.getElementById('level').value = "";
 }
+
 function useropennew(btn) {
 	useraction = btn.id.toString();
 	if (useraction == "newuser") {
 		userclearinput();
-	}
-	else
+	} else
 		edituser();
 	document.getElementById('addphoneform').style.display = 'none';
 	document.getElementById('addphone').style.display = 'flex';
@@ -559,29 +689,49 @@ function useropennew(btn) {
 	document.getElementById('cthdform').style.display = 'none';
 	document.getElementById('adduserform').style.display = 'block';
 }
+
 function getalluser() {
 	var table = document.getElementById("usertable");
 	var arr = JSON.parse(localStorage.getItem("user"));
 	if (arr == null) {
-		var user = [
-			{ Username: "Admin1", Password: 123,Realname: "Nguyen Van A",SDT:"113" ,Level: 1 },
-			{ Username: "Enduser1", Password: 123,Realname: "Nguyen Van B",SDT:"114", Level: 0 },
-			{ Username: "Enduser2", Password: 123, Realname: "Tran Van C",SDT:"115",Level: 0 },
+		var user = [{
+				Username: "Admin1",
+				Password: 123,
+				Realname: "Nguyen Van A",
+				SDT: "113",
+				Level: 1
+			},
+			{
+				Username: "Enduser1",
+				Password: 123,
+				Realname: "Nguyen Van B",
+				SDT: "114",
+				Level: 0
+			},
+			{
+				Username: "Enduser2",
+				Password: 123,
+				Realname: "Tran Van C",
+				SDT: "115",
+				Level: 0
+			},
 
 		];
 		localStorage.setItem("user", JSON.stringify(user));
 	}
+	delrow(table);
 	arr = JSON.parse(localStorage.getItem("user"));
 	for (var i = 0; i < arr.length; i++) {
-		table.innerHTML += "<tr><td>" + arr[i].Username + "</td><td>"
-			+ arr[i].Password + "</td><td> "
-			+ arr[i].Realname +"</td><td> "
-			+ arr[i].SDT + "</td><td> "
-			+ arr[i].Level + "</td><td>"
-			+ "<a href='#'><i id='edituser' onclick='useropennew(this)' class='fa-solid fa-pen-nib'></i></a>"
-			+ "<a href='#'<i onclick='deluser()' class='fa-solid fa-trash'></i></a></td></tr>";
+		table.innerHTML += "<tr><td>" + arr[i].Username + "</td><td>" +
+			arr[i].Password + "</td><td> " +
+			arr[i].Realname + "</td><td> " +
+			arr[i].SDT + "</td><td> " +
+			arr[i].Level + "</td><td>" +
+			"<a href='#'><i id='edituser' onclick='useropennew(this)' class='fa-solid fa-pen-nib'></i></a>" +
+			"<a href='#'<i onclick='deluser()' class='fa-solid fa-trash'></i></a></td></tr>";
 	}
 }
+
 function getuser(user) {
 	document.getElementById("username").value = user.Username;
 	document.getElementById("password").value = user.Password;
@@ -589,6 +739,7 @@ function getuser(user) {
 	document.getElementById("sdt").value = user.SDT;
 	document.getElementById("level").value = user.Level;
 }
+
 function edituser() {
 	var arr = JSON.parse(localStorage.getItem("user"));
 	var table = document.getElementById('usertable');
@@ -600,6 +751,7 @@ function edituser() {
 		};
 	}
 }
+
 function deluser() {
 	if (confirm('Are you sure ?')) {
 		var table = document.getElementById('usertable');
@@ -607,7 +759,9 @@ function deluser() {
 		for (var i = 1; i < table.rows.length; i++) {
 			table.rows[i].onclick = function () {
 				var un = this.cells[0].innerHTML;
-				var filteredArray = arr.filter(function (user) { return user.Username !== un })
+				var filteredArray = arr.filter(function (user) {
+					return user.Username !== un
+				})
 				localStorage.setItem("user", JSON.stringify(filteredArray));
 				delrow(table);
 				getalluser();
@@ -615,41 +769,73 @@ function deluser() {
 		}
 	}
 }
-function userformaction() {
-	var username = document.getElementById('username').value;
-	var password = document.getElementById('password').value;
-	var level = document.getElementById('level').value;
-	var realname = document.getElementById('realname').value;
-	var sdt = document.getElementById('sdt').value;
-	var arr = JSON.parse(localStorage.getItem("user"));
-	let newuser = {
-		Username: username,
-		Password: password,
-		Realname: realname,
-		SDT: sdt,
-		Level: level,	
-	};
-	if (useraction == "newuser") {
-		arr.push(newuser);
-		localStorage.setItem("user", JSON.stringify(arr));
+
+function usercheckinput() {
+	var username = document.getElementById('username');
+	var password = document.getElementById('password');
+	var level = document.getElementById('level');
+	var realname = document.getElementById('realname');
+	var sdt = document.getElementById('sdt');
+	if (username.value == "") {
+		username.focus();
+		return false;
 	}
-	else {
-		for (var i = 0; i < arr.length; i++) {
-			var edituser = arr[i];
-			if (edituser.Username == username) {
-				edituser.Password = password;
-				edituser.Level = level;
-				edituser.Realname = realname;
-				edituser.SDT = sdt;
-				localStorage.setItem("user", JSON.stringify(arr));
-				break;
+	if (password.value == "") {
+		password.focus()
+		return false;
+	}
+	if (level.value == "" || isNaN(level.value)) {
+		level.focus();
+		return false;
+	}
+	if (realname.value == "") {
+		realname.focus();
+		return false;
+	}
+	if (sdt.value == "") {
+		sdt.focus();
+		return false;
+	}
+	return true;
+}
+
+function userformaction() {
+	if (usercheckinput()) {
+		var username = document.getElementById('username').value;
+		var password = document.getElementById('password').value;
+		var level = document.getElementById('level').value;
+		var realname = document.getElementById('realname').value;
+		var sdt = document.getElementById('sdt').value;
+		var arr = JSON.parse(localStorage.getItem("user"));
+		let newuser = {
+			Username: username,
+			Password: password,
+			Realname: realname,
+			SDT: sdt,
+			Level: level,
+		};
+		if (useraction == "newuser") {
+			arr.push(newuser);
+			localStorage.setItem("user", JSON.stringify(arr));
+		} else {
+			for (var i = 0; i < arr.length; i++) {
+				var edituser = arr[i];
+				if (edituser.Username == username) {
+					edituser.Password = password;
+					edituser.Level = level;
+					edituser.Realname = realname;
+					edituser.SDT = sdt;
+					localStorage.setItem("user", JSON.stringify(arr));
+					break;
+				}
 			}
 		}
+		closeform();
+		delrow(document.getElementById("usertable"));
+		getalluser();
 	}
-	closeform();
-	delrow(document.getElementById("usertable"));
-	getalluser();
 }
+
 function searchuser() {
 	var userarr = JSON.parse(localStorage.getItem("user"));
 	var table = document.getElementById("usertable");
@@ -662,15 +848,17 @@ function searchuser() {
 			return user.Username.toLowerCase().includes(searchkey.toLowerCase());
 		})
 	else
-		arr = userarr.filter(function (user) { return user.Level == searchkey })
+		arr = userarr.filter(function (user) {
+			return user.Level == searchkey
+		})
 	for (var i = 0; i < arr.length; i++) {
-		table.innerHTML += "<tr><td>" + arr[i].Username + "</td><td>"
-			+ arr[i].Password + "</td><td> "
-			+ arr[i].Realname +"</td><td> "
-			+ arr[i].SDT + "</td><td> "
-			+ arr[i].Level + "</td><td>"
-			+ "<a href='#'><i id='edituser' onclick='useropennew(this)' class='fa-solid fa-pen-nib'></i></a>"
-			+ "<a href='#'<i onclick='deluser()' class='fa-solid fa-trash'></i></a></td></tr>";
+		table.innerHTML += "<tr><td>" + arr[i].Username + "</td><td>" +
+			arr[i].Password + "</td><td> " +
+			arr[i].Realname + "</td><td> " +
+			arr[i].SDT + "</td><td> " +
+			arr[i].Level + "</td><td>" +
+			"<a href='#'><i id='edituser' onclick='useropennew(this)' class='fa-solid fa-pen-nib'></i></a>" +
+			"<a href='#'<i onclick='deluser()' class='fa-solid fa-trash'></i></a></td></tr>";
 	}
 }
 //---------------------------------------------------------STATISTCS-----------------------------------------------
@@ -682,12 +870,14 @@ function openstatistic() {
 	if (active !== "statistic") {
 		active = "statistic";
 		p.style.display = "none";
+
 		u.style.display = "none";
 		hd.style.display = "none";
 		s.style.display = "block";
 	}
 }
-function getarr(){
+
+function getarr() {
 	var searchkey = document.getElementById("searchsstxt").value;
 	var retrievedPhone = JSON.parse(localStorage.getItem("phone"));
 	var retrievedhd = JSON.parse(localStorage.getItem("hoadon"));
@@ -702,31 +892,33 @@ function getarr(){
 			return today === new Date(hoadon.Ngay).toLocaleDateString();
 		});
 	}
-	if(st == "This month"){
+	if (st == "This month") {
 		let month = new Date().getMonth();
 		let year = new Date().getFullYear();
 		hdarr = retrievedhd.filter(function (hoadon) {
 			return (month == new Date(hoadon.Ngay).getMonth() && year == new Date(hoadon.Ngay).getFullYear());
 		});
 	}
-	if(st == "This year"){
+	if (st == "This year") {
 		let year = new Date().getFullYear();
 		hdarr = retrievedhd.filter(function (hoadon) {
-			return  year == new Date(hoadon.Ngay).getFullYear();
+			return year == new Date(hoadon.Ngay).getFullYear();
 		});
 	}
 	if (st == "ALL")
 		hdarr = retrievedhd;
 	localStorage.setItem("hdarr", JSON.stringify(hdarr));
-		for (var i = 0; i < hdarr.length; i++) {
-			idarr[i] = hdarr[i].ID;
-		}
+	for (var i = 0; i < hdarr.length; i++) {
+		idarr[i] = hdarr[i].ID;
+	}
 
-		cthdarr = retrievedcthd.filter(function (cthd) { return idarr.includes(cthd.IDHD); });
-		localStorage.setItem("testcthd", JSON.stringify(cthdarr));
-		for (i = 0; i < cthdarr.length; i++) {
-			idarr[i] = cthdarr[i].IDSP;
-		}
+	cthdarr = retrievedcthd.filter(function (cthd) {
+		return idarr.includes(cthd.IDHD);
+	});
+	localStorage.setItem("testcthd", JSON.stringify(cthdarr));
+	for (i = 0; i < cthdarr.length; i++) {
+		idarr[i] = cthdarr[i].IDSP;
+	}
 	var stat = [];
 	for (i = 0; i < cthdarr.length; i++) {
 		let phone = retrievedPhone.find(phone => phone.ID == cthdarr[i].IDSP) //&& phone.Brand.toLowerCase().includes(searchkey.toLowerCase()));
@@ -744,33 +936,43 @@ function getarr(){
 	localStorage.setItem("return arr", JSON.stringify(stat));
 	return stat;
 }
+
 function CAl() {
 	var table = document.getElementById("statistictable");
 	delrow(table);
 	var sparr = getarr();
 	sparr = calSL(sparr);
 	for (var i = 0; i < sparr.length; i++) {
-		table.innerHTML += "<tr><td>" + sparr[i].IDSP + "</td><td>"
-			+ sparr[i].Name + "</td><td>"
-			+ sparr[i].SL + "</td><td>"
-			+ sparr[i].Price * sparr[i].SL + "</td></tr>";
+		table.innerHTML += "<tr><td>" + sparr[i].IDSP + "</td><td>" +
+			sparr[i].Name + "</td><td>" +
+			sparr[i].SL + "</td><td>" +
+			sparr[i].Price * sparr[i].SL + "</td></tr>";
 	}
 }
+
+function logout() {
+	if (confirm('Are you sure ?')) {
+		localStorage.removeItem("khachhang");
+		location.href = "project.html";
+	}
+
+}
+
 function calSL(arr1) {
 	var sl = 0;
 	var id = null;
 	var out = [];
 	var temparr = [];
-	while(arr1.length>0){
-  sl = 0
-  id = arr1[0].IDSP;
-  temparr = arr1.filter(phone => phone.IDSP == id);
-  for (var j = 0; j<temparr.length;j++){
-    sl += temparr[j].SL; 
-  }
-  arr1[0].SL = sl;
-  out.push(arr1[0]);
-  arr1 = arr1.filter(phone => phone.IDSP != id)
-}
+	while (arr1.length > 0) {
+		sl = 0
+		id = arr1[0].IDSP;
+		temparr = arr1.filter(phone => phone.IDSP == id);
+		for (var j = 0; j < temparr.length; j++) {
+			sl += temparr[j].SL;
+		}
+		arr1[0].SL = sl;
+		out.push(arr1[0]);
+		arr1 = arr1.filter(phone => phone.IDSP != id)
+	}
 	return out;
 }
